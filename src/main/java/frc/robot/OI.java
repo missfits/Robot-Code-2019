@@ -7,36 +7,38 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
+  Joystick xBox = new Joystick(0);
+  Joystick leftStick = new Joystick(1);
+  Joystick rightStick = new Joystick(2);
+	
+	public Button aButton = new JoystickButton(xBox,1);
+	public Button bButton = new JoystickButton(xBox,2);
+	public Button xButton = new JoystickButton(xBox,3);
+	public Button yButton = new JoystickButton(xBox,4);
+	public Button leftBumperButton = new JoystickButton(xBox,5);
+	public Button rightBumperButton = new JoystickButton(xBox,6);
+	public Button backButton = new JoystickButton(xBox,7);
+  public Button startButton = new JoystickButton(xBox,8);
+  
+  public double leftStickY(){return leftStick.getRawAxis(0);}
+  public double rightStickY(){return rightStick.getRawAxis(0);}
 
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
+	public double xBoxLeftStickY() {return xBox.getRawAxis(1);}
+	public double xBoxLeftStickX() {return xBox.getRawAxis(0);}
+	public double xBoxRightStickY() {return xBox.getRawAxis(5);}
+	public double xBoxRightStickX() {return xBox.getRawAxis(4);}
+	public boolean leftTriggerPressed() {return xBox.getRawAxis(2) > 0.2;}
+  public boolean rightTriggerPressed() {return xBox.getRawAxis(3) > 0.2;}
+  
+  public OI(){
 
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
+  }
 }

@@ -7,12 +7,23 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
 public class Vision extends Subsystem {
+ // double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
+  private NetworkTable table;
+  public Vision(){
+    table = NetworkTableInstance.getDefault().getTable("RaspberryPi");
+  }
+  public double getOffset(){
+    return table.getEntry("Offset").getDouble(0);
+  } 
+  //double something = Vision.getOffset();
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 

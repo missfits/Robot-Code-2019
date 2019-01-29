@@ -12,8 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Vision;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +28,7 @@ import frc.robot.subsystems.DriveTrain;
 public class Robot extends TimedRobot {
   public static DriveTrain driveTrain = new DriveTrain();
   public static OI oi;
+  public static Vision vision = new Vision();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -120,6 +124,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
+    System.out.println("offset value: " + offsetValue);
+
   }
 
   /**

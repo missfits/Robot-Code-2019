@@ -1,44 +1,54 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * An example command.  You can replace me with your own command.
- */
-public class Teleop extends Command {
-  public Teleop() {
+public class ApproachTarget extends Command {
+  Timer tom;
+  public ApproachTarget() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveTrain);
+    // eg. requires(chassis);
+    tom = new Timer();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    tom.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
+    double offset = Robot.vision.getOffset();
+    //positive offset = steer left
+    if(offset < -0.05){
+      Robot.driveTrain.tankDrive(0.5*(1 + Math.abs(Robot.vision.getOffset())), 0.5);
+    }else if(offset > 0.05){
+      Robot.driveTrain.tankDrive(0.5, 0.5*(1 + Math.abs(Robot.vision.getOffset())));
+    }else{
+      Robot.driveTrain.tankDrive(.5, .5);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
+
   @Override
   protected boolean isFinished() {
-    return false;
+    return tom.get() > 5;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same

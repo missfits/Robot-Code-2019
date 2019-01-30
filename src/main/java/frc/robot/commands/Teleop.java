@@ -28,6 +28,7 @@ public class Teleop extends Command {
   @Override
   protected void execute() {
     Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
+    Robot.elevator.elevate(-1*Robot.oi.xBoxLeftStickY());
   }
 
   // Make this return true when this Command no longer needs to run execute()

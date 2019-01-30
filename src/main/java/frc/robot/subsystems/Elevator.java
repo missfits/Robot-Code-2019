@@ -8,14 +8,16 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 /**
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
+  final TalonSRX motor = new TalonSRX(7);
+  public void elevate(double speed){
+    motor.set(ControlMode.PercentOutput, speed);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

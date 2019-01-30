@@ -29,9 +29,9 @@ public class ApproachTarget extends Command {
   protected void execute() {
     double offset = Robot.vision.getOffset();
     //positive offset = steer left
-    if(offset < -0.05){
+    if(offset < -0.02){
       Robot.driveTrain.tankDrive(0.5*(1 + Math.abs(Robot.vision.getOffset())), 0.5);
-    }else if(offset > 0.05){
+    }else if(offset > 0.02){
       Robot.driveTrain.tankDrive(0.5, 0.5*(1 + Math.abs(Robot.vision.getOffset())));
     }else{
       Robot.driveTrain.tankDrive(.5, .5);

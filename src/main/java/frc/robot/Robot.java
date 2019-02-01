@@ -17,7 +17,7 @@ import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Elevator;
-
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Vision vision = new Vision();
   public static Elevator elevator = new Elevator();
+  public static Intake intake = new Intake();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

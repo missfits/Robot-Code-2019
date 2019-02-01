@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.VictorSP;
@@ -17,19 +18,29 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
   final TalonSRX tilt = new TalonSRX(2);
-  final VictorSP wheelsFront = new VictorSP(5);
-  final VictorSP wheelsBack = new VictorSP(8);
-public void wheelsIn (){
-  wheelsFront.set(0.5);
-  wheelsBack.set(-0.5); 
+  final VictorSP wheels = new VictorSP(8);
+
+public void tiltUp(){
+  tilt.set(ControlMode.Position, 0);
 }
-public void wheelsOut (){
-  wheelsFront.set(-0.5);
-  wheelsBack.set(0.5);
+public void tiltBackwards(){
+  tilt.set(ControlMode.Position, -1000);
+}
+public void tiltAngled(){
+  tilt.set(ControlMode.Position, 500);
+}
+public void tiltDown(){
+  tilt.set(ControlMode.Position, 1000);
+}
+
+public void wheelsIn(){
+  wheels.set(0.5); 
+}
+public void wheelsOut(){
+  wheels.set(-0.5);
 }
 public void wheelsStop(){
-  wheelsFront.set(0);
-  wheelsBack.set(0);
+  wheels.set(0);
 }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

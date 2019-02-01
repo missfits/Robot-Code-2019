@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class RunIntakeWheels extends Command {
-  private String direction;
-  public RunIntakeWheels(String d) {
+  public enum WheelDirection{
+    IN, OUT
+  }
+  private WheelDirection direction;
+  public RunIntakeWheels(WheelDirection d) {
     direction = d;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -26,10 +29,13 @@ public class RunIntakeWheels extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == "in"){
+    switch(direction){
+      case IN:
       Robot.intake.wheelsIn();
-    }else if(direction == "out"){
+      break;
+      case OUT:
       Robot.intake.wheelsOut();
+      break;
     }
   }
 

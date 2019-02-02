@@ -17,11 +17,11 @@ import frc.robot.commands.Teleop;
  */
 public class DriveTrain extends Subsystem {
   final TalonSRX frontLeft = new TalonSRX(2);
-	final TalonSRX rearLeft = new TalonSRX(3);
-	final TalonSRX frontRight = new TalonSRX(1);
-  final TalonSRX rearRight = new TalonSRX(4);
+	final TalonSRX rearLeft = new TalonSRX(1);
+	final TalonSRX frontRight = new TalonSRX(6);
+  final TalonSRX rearRight = new TalonSRX(3);
   final TalonSRX midLeft = new TalonSRX(5);
-  final TalonSRX midRight = new TalonSRX(6);
+  final TalonSRX midRight = new TalonSRX(4);
 
   public DriveTrain(){
 		frontRight.setInverted(true);

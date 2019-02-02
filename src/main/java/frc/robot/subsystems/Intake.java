@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  final TalonSRX tilt = new TalonSRX(2);
+  final TalonSRX tilt = new TalonSRX(10);
   final VictorSP wheels = new VictorSP(8);
 
 public void tiltUp(){

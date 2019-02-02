@@ -15,9 +15,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  * Add your docs here.
  */
 public class Climber extends Subsystem {
-  final TalonSRX motor1 = new TalonSRX(2);
-  final TalonSRX motor2 = new TalonSRX(6);
+  final TalonSRX motor1 = new TalonSRX(8);
+  final TalonSRX motor2 = new TalonSRX(9);
+  //arms will be run by servos
 
+  public void climb(double speed){
+    motor1.set(ControlMode.PercentOutput, speed);
+    motor2.set(ControlMode.PercentOutput, speed);
+  }
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

@@ -9,24 +9,38 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.commands.Teleop;
+import frc.robot.RobotMap;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class DriveTrain extends Subsystem {
-  final TalonSRX frontLeft = new TalonSRX(2);
-	final TalonSRX rearLeft = new TalonSRX(1);
-	final TalonSRX frontRight = new TalonSRX(6);
-  final TalonSRX rearRight = new TalonSRX(3);
-  final TalonSRX midLeft = new TalonSRX(5);
-  final TalonSRX midRight = new TalonSRX(4);
+  final TalonSRX frontLeft = new TalonSRX(RobotMap.frontLeft);
+	final TalonSRX rearLeft = new TalonSRX(RobotMap.rearLeft);
+	final TalonSRX frontRight = new TalonSRX(RobotMap.frontRight);
+  final TalonSRX rearRight = new TalonSRX(RobotMap.rearRight);
+  final TalonSRX centerLeft = new TalonSRX(RobotMap.centerLeft);
+  final TalonSRX centerRight = new TalonSRX(RobotMap.centerRight);
 
   public DriveTrain(){
-		frontRight.setInverted(true);
+    //inversion might not be working? figure that out later
+    rearLeft.follow(frontLeft);
+    centerLeft.follow(frontLeft);
+    rearRight.follow(frontLeft);
+    centerRight.follow(frontLeft);
+    frontRight.follow(frontLeft);
+
+    frontRight.setInverted(true);
     rearRight.setInverted(true);
-    midRight.setInverted(true);
+   /* rearLeft.setInverted(InvertType.FollowMaster);
+    centerLeft.setInverted(InvertType.FollowMaster);
+    frontRight.setInverted(InvertType.OpposeMaster);
+    rearRight.setInverted(InvertType.OpposeMaster);
+    centerRight.setInverted(InvertType.OpposeMaster);*/
+
   }
   
   public void driveStraight(double speed) {
@@ -34,17 +48,17 @@ public class DriveTrain extends Subsystem {
 		rearLeft.set(ControlMode.PercentOutput, speed);
 		frontRight.set(ControlMode.PercentOutput, speed);
     rearRight.set(ControlMode.PercentOutput, speed);
-    midRight.set(ControlMode.PercentOutput, speed);
-    midLeft.set(ControlMode.PercentOutput, speed);
+    centerRight.set(ControlMode.PercentOutput, speed);
+    centerLeft.set(ControlMode.PercentOutput, speed);
   }
   
   public void tankDrive(double lSpeed, double rSpeed){
     frontLeft.set(ControlMode.PercentOutput, lSpeed);
     rearLeft.set(ControlMode.PercentOutput, lSpeed);
-    midLeft.set(ControlMode.PercentOutput, lSpeed);
+    centerLeft.set(ControlMode.PercentOutput, lSpeed);
 		frontRight.set(ControlMode.PercentOutput, rSpeed);
     rearRight.set(ControlMode.PercentOutput, rSpeed);
-    midRight.set(ControlMode.PercentOutput, rSpeed);
+    centerRight.set(ControlMode.PercentOutput, rSpeed);
   }
   
   @Override

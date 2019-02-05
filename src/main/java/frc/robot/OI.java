@@ -31,8 +31,8 @@ public class OI {
 	public Button backButton = new JoystickButton(xBox,7);
   public Button startButton = new JoystickButton(xBox,8);
   
-  public double leftStickY(){return leftStick.getRawAxis(0);}
-  public double rightStickY(){return rightStick.getRawAxis(0);}
+  public double leftStickY(){return -leftStick.getRawAxis(1);}
+  public double rightStickY(){return -rightStick.getRawAxis(1);}
 
 	public double xBoxLeftStickY() {return xBox.getRawAxis(1);}
 	public double xBoxLeftStickX() {return xBox.getRawAxis(0);}

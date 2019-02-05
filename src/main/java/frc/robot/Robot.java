@@ -129,8 +129,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
-    System.out.println("offset value: " + offsetValue);
+    //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
+    //System.out.println("Offset: " + vision.getOffset());
 
   }
 

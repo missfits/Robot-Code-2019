@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  * Add your docs here.
@@ -17,8 +19,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Vision extends Subsystem {
  // double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
   private NetworkTable table;
+  private AnalogInput ultrasonic = new AnalogInput(0);
+  
+  /*public void convertDistance(int distanceInBits){
+    int bitToMillimeters = distanceInBits * 5;
+    System.out.println(bitToMillimeters);
+  } */
+  
+  public double getDistance(){
+    return (ultrasonic.getAverageValue() * 5) / 100.0;
+  }
   public Vision(){
     table = NetworkTableInstance.getDefault().getTable("RaspberryPi");
+    ultrasonic.setAverageBits(2);
   }
   public double getOffset(){
     return table.getEntry("Offset").getDouble(0);

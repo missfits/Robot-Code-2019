@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends Command {
-  double targetDistance = 1;
+  double targetDistance = 18;
   public ApproachTarget() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

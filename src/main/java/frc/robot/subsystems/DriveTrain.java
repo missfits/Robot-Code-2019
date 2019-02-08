@@ -7,10 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
 import frc.robot.commands.Teleop;
 import frc.robot.RobotMap;
 
@@ -24,6 +27,7 @@ public class DriveTrain extends Subsystem {
   final TalonSRX rearRight = new TalonSRX(RobotMap.rearRight);
   final TalonSRX centerLeft = new TalonSRX(RobotMap.centerLeft);
   final TalonSRX centerRight = new TalonSRX(RobotMap.centerRight);
+  final AHRS navX = new AHRS(Port.kMXP);
 
   public DriveTrain(){
     //inversion might not be working? figure that out later
@@ -61,6 +65,11 @@ public class DriveTrain extends Subsystem {
     centerRight.set(ControlMode.PercentOutput, rSpeed);
   }
   
+  public double getAngle() {
+    return navX.getAngle();
+
+
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new Teleop());

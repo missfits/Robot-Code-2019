@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends Command {
-  Timer tom;
+  double targetDistance = 1;
   public ApproachTarget() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    tom = new Timer();
-  }
+   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    tom.start();
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -45,9 +44,11 @@ public class ApproachTarget extends Command {
   // Make this return true when this Command no longer needs to run execute()
 
   @Override
-  protected boolean isFinished() {
-    return tom.get() > 5;
-  }
+  protected boolean isFinished() { 
+    return Robot.vision.getDistance()<=targetDistance;
+   }
+
+
 
   // Called once after isFinished returns true
   @Override

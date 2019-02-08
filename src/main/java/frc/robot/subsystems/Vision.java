@@ -27,6 +27,7 @@ public class Vision extends Subsystem {
   } */
   
   public double getDistance(){
+    //units is in inches (idk why it's supposed to be in mm)
     return (ultrasonic.getAverageValue() * 5) / 100.0;
   }
   public Vision(){

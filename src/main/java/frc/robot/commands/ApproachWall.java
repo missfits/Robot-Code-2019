@@ -10,15 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeTilt extends Command {
-  public enum TiltPosition {
-    UP, BACKWARDS, ANGLED, DOWN
-  }
-
-  private TiltPosition position;
-  public IntakeTilt(TiltPosition p) {
-    position = p;
-
+public class ApproachWall extends Command {
+  public ApproachWall() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -31,27 +24,18 @@ public class IntakeTilt extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if(position == TiltPosition.UP){
-      Robot.intake.tiltUp();
-    } else if(position == TiltPosition.BACKWARDS){
-      Robot.intake.tiltBackwards();
-    } else if(position == TiltPosition.ANGLED){
-      Robot.intake.tiltAngled();
-    } else {
-      Robot.intake.tiltDown();
-    }*/
-    
+    Robot.driveTrain.driveStraight(0.65);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.vision.getDistance() <= 24;
   }
-
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same

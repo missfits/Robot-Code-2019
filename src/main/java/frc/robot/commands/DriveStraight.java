@@ -10,14 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeTilt extends Command {
-  public enum TiltPosition {
-    UP, BACKWARDS, ANGLED, DOWN
-  }
+public class DriveStraight extends Command {
+  private double distance, offset;
 
-  private TiltPosition position;
-  public IntakeTilt(TiltPosition p) {
-    position = p;
+  public DriveStraight(double inches) {
+    distance = inches;
 
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -26,32 +23,29 @@ public class IntakeTilt extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+      offset = Robot.driveTrain.getLeftPosition();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if(position == TiltPosition.UP){
-      Robot.intake.tiltUp();
-    } else if(position == TiltPosition.BACKWARDS){
-      Robot.intake.tiltBackwards();
-    } else if(position == TiltPosition.ANGLED){
-      Robot.intake.tiltAngled();
-    } else {
-      Robot.intake.tiltDown();
-    }*/
-    
+    Robot.driveTrain.driveStraight(0.5);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return Math.abs(Robot.driveTrain.getLeftPosition()) >= Math.abs(distance) + Math.abs(offset);
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrain.driveStraight(0);
+
   }
 
   // Called when another command which requires one or more of the same

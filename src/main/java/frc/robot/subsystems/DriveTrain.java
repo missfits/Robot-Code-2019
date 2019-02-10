@@ -64,6 +64,16 @@ public class DriveTrain extends Subsystem {
     rearRight.set(ControlMode.PercentOutput, rSpeed);
     centerRight.set(ControlMode.PercentOutput, rSpeed);
   }
+
+  public double getLeftPosition() {
+    return centerLeft.getSelectedSensorPosition()*6*Math.PI/4096;
+  }
+  public double getRightPosition() {
+    return centerRight.getSelectedSensorPosition()*6*Math.PI/4096;
+  }
+
+
+
   
   public double getAngle() {
     return navX.getAngle();

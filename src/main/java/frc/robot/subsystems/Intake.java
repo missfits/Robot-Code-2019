@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,21 +18,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  final TalonSRX tilt = new TalonSRX(10);
+  final VictorSP tilt = new VictorSP(10);
   final VictorSP wheels = new VictorSP(8);
 
-public void tiltUp(){
-  tilt.set(ControlMode.Position, 0);
-}
-public void tiltBackwards(){
-  tilt.set(ControlMode.Position, -1000);
-}
-public void tiltAngled(){
-  tilt.set(ControlMode.Position, 500);
-}
-public void tiltDown(){
-  tilt.set(ControlMode.Position, 1000);
-}
+
 
 public void wheelsIn(){
   wheels.set(0.5); 

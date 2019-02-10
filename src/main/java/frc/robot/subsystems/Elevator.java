@@ -14,10 +14,18 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  final TalonSRX motor = new TalonSRX(7);
+  final TalonSRX motor1 = new TalonSRX(7);
+  final TalonSRX motor2 = new TalonSRX(7);
+
+ 
   public void elevate(double speed){
-    motor.set(ControlMode.PercentOutput, speed);
+    motor1.set(ControlMode.PercentOutput, speed);
+    motor2.set(ControlMode.PercentOutput, speed);
   }
+
+  
+
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

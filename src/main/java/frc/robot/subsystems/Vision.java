@@ -34,6 +34,9 @@ public class Vision extends Subsystem {
     table = NetworkTableInstance.getDefault().getTable("RaspberryPi");
     ultrasonic.setAverageBits(2);
   }
+  public void setVisionMode(boolean b){
+    table.getEntry("Vision Mode").setBoolean(b);
+  }
   public double getOffset(){
     return table.getEntry("Offset").getDouble(0);
   } 

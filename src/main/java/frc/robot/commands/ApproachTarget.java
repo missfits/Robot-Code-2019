@@ -20,7 +20,7 @@ public class ApproachTarget extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+    Robot.vision.setVisionMode(true);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -54,6 +54,7 @@ public class ApproachTarget extends Command {
   @Override
   protected void end() {
     Robot.driveTrain.driveStraight(0);
+    Robot.vision.setVisionMode(false);
   }
 
   // Called when another command which requires one or more of the same

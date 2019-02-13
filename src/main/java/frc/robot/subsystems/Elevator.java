@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  final TalonSRX motor1 = new TalonSRX(7);
+  final TalonSRX motor1 = new TalonSRX(8);
   final TalonSRX motor2 = new TalonSRX(7);
 
  
@@ -24,7 +24,10 @@ public class Elevator extends Subsystem {
   }
 
   
-
+  public double getPosition() {
+    return motor1.getSelectedSensorPosition();
+  }
+ 
 
   @Override
   public void initDefaultCommand() {

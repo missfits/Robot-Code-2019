@@ -27,16 +27,16 @@ public class ApproachTarget extends Command {
   @Override
   protected void execute() {
     double offset = Robot.vision.getOffset();
-    System.out.println("Offset: " + offset);
+    //System.out.println("Offset: " + offset);
     //positive offset = steer left
     if(offset < -0.02){
-      System.out.println("going right");
+      //System.out.println("going right");
       Robot.driveTrain.tankDrive(0.5*(1 + Math.abs(Robot.vision.getOffset())), 0.5);
     }else if(offset > 0.02){
-      System.out.println("going left");
+      //System.out.println("going left");
       Robot.driveTrain.tankDrive(0.5, 0.5*(1 + Math.abs(Robot.vision.getOffset())));
     }else{
-      System.out.println("straight");
+      //System.out.println("straight");
       Robot.driveTrain.tankDrive(.5, .5);
     }
   }

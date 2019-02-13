@@ -18,8 +18,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
  * Add your docs here.
  */
 public class Climber extends Subsystem {
-  final VictorSPX motor1 = new VictorSPX(8);
-  final VictorSPX motor2 = new VictorSPX(9);
+  final VictorSPX motor1 = new VictorSPX(0);
+  final VictorSPX motor2 = new VictorSPX(1);
   final Servo arms = new Servo(3);
   final DigitalInput topLimitSwitch = new DigitalInput(1);
   final DigitalInput bottomLimitSwitch = new DigitalInput(1);

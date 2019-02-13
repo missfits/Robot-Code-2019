@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.IntakeTilt;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.ApproachTarget;
+import frc.robot.commands.Climb;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -47,5 +49,6 @@ public class OI {
 		xButton.whenPressed(new IntakeTilt(TiltPosition.DOWN));
 		yButton.whenPressed(new IntakeTilt(TiltPosition.UP));
 		leftBumperButton.whenPressed(new ApproachTarget());
+		startButton.whenPressed(new Climb());
   }
 }

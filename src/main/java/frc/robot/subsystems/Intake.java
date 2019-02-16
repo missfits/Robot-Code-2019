@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
   final VictorSP tilt = new VictorSP(10);
   final VictorSP wheels = new VictorSP(8);
-
+  final VictorSP arm = new VictorSP(9);
 
 public void tilt(double direction){
   tilt.set(0.5*direction);

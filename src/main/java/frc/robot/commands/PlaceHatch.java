@@ -8,20 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.commands.MoveClimber.Direction;
 
-public class Climb extends CommandGroup {
+public class PlaceHatch extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Climb() {
-    addSequential(new DeployArms());
-    addParallel(new DriveStraight(1234567890));
-    addSequential(new TimedCommand(2));
-    addSequential(new MoveClimber(Direction.UP));
-    addSequential(new ApproachWall());
-    addSequential(new MoveClimber(Direction.DOWN));
+  public PlaceHatch() {
+    addSequential(new ApproachTarget());
+    addSequential(new DriveStraight(12));
     
 
     // Add Commands here:

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Relay.Value;
 
 /**
  * Add your docs here.
@@ -21,6 +22,8 @@ public class Vision extends Subsystem {
  // double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
   private NetworkTable table;
   private AnalogInput ultrasonic = new AnalogInput(0);
+  private Relay light = new Relay(0);
+
   
   /*public void convertDistance(int distanceInBits){
     int bitToMillimeters = distanceInBits * 5;
@@ -37,6 +40,12 @@ public class Vision extends Subsystem {
   }
   public void setVisionMode(boolean b){
     table.getEntry("Vision Mode").setBoolean(b);
+ 
+    if (b){
+      light.set(Value.kReverse);
+    }else{
+      light.set(Value.kOff);
+    }
   }
   public boolean getVisionMode(){
     return table.getEntry("Vision Mode").getBoolean(false);

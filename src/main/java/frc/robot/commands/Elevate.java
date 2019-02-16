@@ -10,12 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveStraight extends Command {
-  private double distance, offset;
+public class Elevate extends Command {
 
-  public DriveStraight(double inches) {
-    distance = inches;
-    requires(Robot.driveTrain);
+  public enum Height{
+    BOTTOM, MIDDLE, TOP;
+  }
+  private Height height;
+  public Elevate(Height h) {
+    height = h;
+
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -23,29 +26,34 @@ public class DriveStraight extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      offset = Robot.driveTrain.getLeftPosition();
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.driveStraight(0.5);
-
+   Robot.elevator.elevate(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.driveTrain.getLeftPosition()) >= Math.abs(distance) + Math.abs(offset);
+    switch(height){
+      case BOTTOM:
+        return Robot.elevator.getPosition() >= 5;
+      case MIDDLE:
+        return Robot.elevator.getPosition() >= 6;
+      case TOP:
+        return Robot.elevator.getPosition() >= 7;
+      default:
+        return false;
+    }
 
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.driveStraight(0);
-
+   Robot.elevator.elevate(0);
   }
 
   // Called when another command which requires one or more of the same

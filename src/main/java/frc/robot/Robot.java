@@ -129,6 +129,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //climber.climb(-1*Robot.oi.xBoxRightStickY());
     SmartDashboard.putNumber("Distance(in)", vision.getDistance());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
     //System.out.println("Offset: " + vision.getOffset());

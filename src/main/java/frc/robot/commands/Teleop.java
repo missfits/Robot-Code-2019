@@ -28,7 +28,7 @@ public class Teleop extends Command {
   @Override
   protected void execute() {
     Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
-    Robot.elevator.elevate(-1*Robot.oi.xBoxLeftStickY());
+   // Robot.elevator.elevate(-1*Robot.oi.xBoxLeftStickY());
     Robot.climber.climb(-1*Robot.oi.xBoxRightStickY());
     if(Robot.oi.leftTriggerPressed()){
       Robot.intake.wheelsIn();
@@ -37,11 +37,15 @@ public class Teleop extends Command {
     }else{
       Robot.intake.wheelsStop();
     }
+    Robot.intake.tilt(Math.signum(Robot.oi.xBoxLeftStickY()));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    /*if(Robot.vision.getVisionMode()){
+      
+    }*/
     return false;
   }
 

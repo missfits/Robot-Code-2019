@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -37,9 +38,16 @@ public class Vision extends Subsystem {
   public void setVisionMode(boolean b){
     table.getEntry("Vision Mode").setBoolean(b);
   }
+  public boolean getVisionMode(){
+    return table.getEntry("Vision Mode").getBoolean(false);
+  }
   public double getOffset(){
     return table.getEntry("Offset").getDouble(0);
   } 
+
+  public double getContourNum(){
+    return table.getEntry("Contour Number").getDouble(0);
+  }
   //double something = Vision.getOffset();
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

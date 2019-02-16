@@ -22,7 +22,9 @@ public class Intake extends Subsystem {
   final VictorSP wheels = new VictorSP(8);
 
 
-
+public void tilt(double direction){
+  tilt.set(0.5*direction);
+}
 public void wheelsIn(){
   wheels.set(0.5); 
 }

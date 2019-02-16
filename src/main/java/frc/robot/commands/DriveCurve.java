@@ -8,8 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.FalconPathPlanner;
+import frc.robot.Robot;
 
 public class DriveCurve extends Command {
+  FalconPathPlanner pathPlanner;
+  int step;
   public DriveCurve() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -19,9 +23,10 @@ public class DriveCurve extends Command {
   @Override
   protected void initialize() {
     double[][] autoPath = new double[][] {
-      {0, 1}
-      {1, 2}
-    }
+      {0, 4},
+      {5.5, 9},
+      {3.5, 14.5}
+    };
 
     double totalTime = 5;
     double timeStep = 0.2;
@@ -29,23 +34,26 @@ public class DriveCurve extends Command {
 
     pathPlanner = new FalconPathPlanner(autoPath);
     pathPlanner.calculate(totalTime, timeStep, robotTrackWidth);
+    step = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
+    Robot.driveTrain.tankDrive(pathPlanner.smoothLeftVelocity[step][1], pathPlanner.smoothRightVelocity[step][1]);
+    step++;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return step == pathPlanner.smoothLeftVelocity.length;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same

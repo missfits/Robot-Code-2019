@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new Teleop());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    vision.setVisionMode(true);
   }
 
   /**

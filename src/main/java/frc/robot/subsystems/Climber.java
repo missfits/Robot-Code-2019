@@ -22,7 +22,7 @@ public class Climber extends Subsystem {
   final VictorSPX motor2 = new VictorSPX(1);
   final Servo arms = new Servo(3);
   final DigitalInput topLimitSwitch = new DigitalInput(1);
-  final DigitalInput bottomLimitSwitch = new DigitalInput(1);
+  final DigitalInput bottomLimitSwitch = new DigitalInput(2);
   //arms will be run by servos
 
   public void climb(double speed){

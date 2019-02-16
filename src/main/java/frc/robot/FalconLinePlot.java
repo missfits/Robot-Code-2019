@@ -1,6 +1,7 @@
-package usfirst.frc.team2168.robot;
+package frc.robot;
 
 import java.awt.*;
+import java.awt.Robot;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;

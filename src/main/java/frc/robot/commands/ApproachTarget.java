@@ -8,10 +8,11 @@
 package frc.robot.commands;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends Command {
-  double targetDistance = 18;
+  double targetDistance = 24;
   public ApproachTarget() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -45,6 +46,7 @@ public class ApproachTarget extends Command {
 
   @Override
   protected boolean isFinished() { 
+    SmartDashboard.putNumber("Checking Dist", Robot.vision.getDistance());
     return Robot.vision.getDistance()<=targetDistance;
    }
 
@@ -53,8 +55,9 @@ public class ApproachTarget extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    SmartDashboard.putNumber("Done Driving",Robot.vision.getDistance());
     Robot.driveTrain.driveStraight(0);
-    Robot.vision.setVisionMode(false);
+    //Robot.vision.setVisionMode(false);
   }
 
   // Called when another command which requires one or more of the same

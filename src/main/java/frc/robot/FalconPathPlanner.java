@@ -1,4 +1,4 @@
-package usfirst.frc.team2168.robot;
+package frc.robot;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;

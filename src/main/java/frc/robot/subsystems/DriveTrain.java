@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {
   final TalonSRX rearRight = new TalonSRX(RobotMap.rearRight);
   final TalonSRX centerLeft = new TalonSRX(RobotMap.centerLeft);
   final TalonSRX centerRight = new TalonSRX(RobotMap.centerRight);
-  final AHRS navX = new AHRS(Port.kMXP);
+  final AHRS navX = new AHRS(SPI.Port.kMXP);
 
   public DriveTrain(){
     //inversion might not be working? figure that out later
@@ -57,6 +57,10 @@ public class DriveTrain extends Subsystem {
   }
   
   public void tankDrive(double lSpeed, double rSpeed){
+    lSpeed/= 4;
+    rSpeed /= 4;
+    System.out.println("Left: " + lSpeed);
+    System.out.println("Right: " + rSpeed);
     frontLeft.set(ControlMode.PercentOutput, lSpeed);
     rearLeft.set(ControlMode.PercentOutput, lSpeed);
     centerLeft.set(ControlMode.PercentOutput, lSpeed);

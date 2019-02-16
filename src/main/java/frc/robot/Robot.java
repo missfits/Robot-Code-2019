@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     vision.setVisionMode(true);
+    SmartDashboard.putData("Current Command", Scheduler.getInstance());
   }
 
   /**
@@ -130,6 +131,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Distance(in)", vision.getDistance());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
     //System.out.println("Offset: " + vision.getOffset());

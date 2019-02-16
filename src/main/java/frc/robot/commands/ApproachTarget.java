@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends Command {
-  double targetDistance = 24;
+  double targetDistance = 36;
   public ApproachTarget() {
+    requires(Robot.driveTrain);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
    }
@@ -21,6 +22,7 @@ public class ApproachTarget extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("Starting Approach Target");
     Robot.vision.setVisionMode(true);
   }
 
@@ -28,7 +30,7 @@ public class ApproachTarget extends Command {
   @Override
   protected void execute() {
     double offset = Robot.vision.getOffset();
-    //System.out.println("Offset: " + offset);
+    System.out.println("Offset: " + offset);
     //positive offset = steer left
     if(offset < -0.02){
       //System.out.println("going right");
@@ -56,6 +58,7 @@ public class ApproachTarget extends Command {
   @Override
   protected void end() {
     SmartDashboard.putNumber("Done Driving",Robot.vision.getDistance());
+    System.out.println("Done Approaching Target");
     Robot.driveTrain.driveStraight(0);
     //Robot.vision.setVisionMode(false);
   }

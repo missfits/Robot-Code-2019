@@ -14,6 +14,7 @@ import frc.robot.commands.IntakeTilt;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
+import frc.robot.commands.DriveCurve;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -50,5 +51,6 @@ public class OI {
 		yButton.whenPressed(new IntakeTilt(TiltPosition.UP));
 		leftBumperButton.whenPressed(new ApproachTarget());
 		startButton.whenPressed(new Climb());
+		rightBumperButton.whenPressed(new DriveCurve());
   }
 }

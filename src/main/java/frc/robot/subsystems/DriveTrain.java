@@ -57,8 +57,8 @@ public class DriveTrain extends Subsystem {
   }
   
   public void tankDrive(double lSpeed, double rSpeed){
-    lSpeed/= 4;
-    rSpeed /= 4;
+   /* lSpeed/= 4;
+    rSpeed /= 4;*/
     System.out.println("Left: " + lSpeed);
     System.out.println("Right: " + rSpeed);
     frontLeft.set(ControlMode.PercentOutput, lSpeed);

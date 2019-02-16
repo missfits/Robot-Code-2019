@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends Command {
-  double targetDistance = 36;
+  double targetDistance = 18;
   public ApproachTarget() {
     requires(Robot.driveTrain);
     // Use requires() here to declare subsystem dependencies
@@ -34,10 +34,10 @@ public class ApproachTarget extends Command {
     //positive offset = steer left
     if(offset < -0.02){
       //System.out.println("going right");
-      Robot.driveTrain.tankDrive(0.5*(1 + Math.abs(Robot.vision.getOffset())), 0.5);
+      Robot.driveTrain.tankDrive(0.5*(1 + 4*Math.abs(Robot.vision.getOffset())), 0.5);
     }else if(offset > 0.02){
       //System.out.println("going left");
-      Robot.driveTrain.tankDrive(0.5, 0.5*(1 + Math.abs(Robot.vision.getOffset())));
+      Robot.driveTrain.tankDrive(0.5, 0.5*(1 + 4*Math.abs(Robot.vision.getOffset())));
     }else{
       //System.out.println("straight");
       Robot.driveTrain.tankDrive(.5, .5);

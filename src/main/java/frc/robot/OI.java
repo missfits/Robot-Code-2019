@@ -10,12 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.IntakeTilt;
+import frc.robot.commands.TestIntakeTilt;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
 import frc.robot.commands.DriveCurve;
-
+import frc.robot.commands.IntakeArmTest;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -45,12 +45,9 @@ public class OI {
   public boolean rightTriggerPressed() {return xBox.getRawAxis(3) > 0.2;}
   
   public OI(){
-		aButton.whenPressed(new IntakeTilt(TiltPosition.BACKWARDS));
-		bButton.whenPressed(new IntakeTilt(TiltPosition.ANGLED));
-		xButton.whenPressed(new IntakeTilt(TiltPosition.DOWN));
-		yButton.whenPressed(new IntakeTilt(TiltPosition.UP));
-		leftBumperButton.whenPressed(new ApproachTarget());
-		startButton.whenPressed(new Climb());
-		rightBumperButton.whenPressed(new DriveCurve());
+		yButton.whileHeld(new IntakeArmTest(1));
+		aButton.whileHeld(new IntakeArmTest(-1));
+		leftBumperButton.whileHeld(new TestIntakeTilt(1));
+		leftBumperButton.whileHeld(new TestIntakeTilt(-1));
   }
 }

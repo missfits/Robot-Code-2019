@@ -46,5 +46,6 @@ public class TestIntakeTilt extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.intake.tiltUp(0);
   }
 }

@@ -48,6 +48,6 @@ public class OI {
 		yButton.whileHeld(new IntakeArmTest(1));
 		aButton.whileHeld(new IntakeArmTest(-1));
 		leftBumperButton.whileHeld(new TestIntakeTilt(1));
-		leftBumperButton.whileHeld(new TestIntakeTilt(-1));
+		rightBumperButton.whileHeld(new TestIntakeTilt(-1));
   }
 }

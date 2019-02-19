@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  final VictorSP tilt = new VictorSP(10);
-  final VictorSP wheels = new VictorSP(8);
-  final VictorSP arm = new VictorSP(0);
+  final VictorSP tilt = new VictorSP(0);
+  final VictorSP wheels = new VictorSP(2);
+  final VictorSP arm = new VictorSP(1);
 
 public void tiltUp(int direction){
   tilt.set(direction * 0.4);

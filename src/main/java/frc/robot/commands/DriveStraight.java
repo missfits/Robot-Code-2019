@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class DriveStraight extends Command {
   private double distance, offset;
+  private boolean goingForward;
 
   public DriveStraight(double inches) {
     distance = inches;
@@ -23,6 +24,7 @@ public class DriveStraight extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+      goingForward = distance > Robot.driveTrain.getLeftPosition();
       offset = Robot.driveTrain.getLeftPosition();
 
   }
@@ -30,14 +32,14 @@ public class DriveStraight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.driveStraight(0.5);
+    Robot.driveTrain.driveStraight(goingForward? 0.5 : -0.5);
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.driveTrain.getLeftPosition()) >= Math.abs(distance) + Math.abs(offset);
+    return Math.abs(Robot.driveTrain.getLeftPosition() - offset) >= Math.abs(distance);
 
   }
 

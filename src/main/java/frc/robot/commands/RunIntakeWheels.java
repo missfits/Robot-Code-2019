@@ -7,32 +7,23 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class IntakeTilt extends Command {
-  boolean goingForward;
-  double targetPosition;
-  public enum TiltPosition {
-    START, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT
+/**
+ * Add your docs here.
+ */
+public class RunIntakeWheels extends TimedCommand {
+  public enum Direction{
+    IN, OUT
   }
-
-  public IntakeTilt(TiltPosition p) {
-    switch(p){
-      case START:
-        targetPosition = 1;
-        break;
-      case HATCH_PICKUP:
-        targetPosition = 2;
-        break;
-      case BALL_PICKUP:
-        targetPosition = 3;
-        break;
-      case BALL_SHOOT:
-        targetPosition = 4;
-        break;
-    }
-
+  /**
+   * Add your docs here.
+   */
+  public Direction direction;
+  public RunIntakeWheels(double timeout, Direction d) {
+    super(timeout);
+    direction = d;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -40,34 +31,29 @@ public class IntakeTilt extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    goingForward = Robot.intake.getTiltPosition() < targetPosition;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(goingForward){
-      Robot.intake.tiltOut();
+    if(direction == Direction.IN){
+      Robot.intake.wheelsIn();
     }else{
-      Robot.intake.tiltIn();
+      Robot.intake.wheelsOut();
     }
+    
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return goingForward? Robot.elevator.getPosition() >= targetPosition: Robot.elevator.getPosition() <= targetPosition;
-  }
-
-  // Called once after isFinished returns true
+  // Called once after timeout
   @Override
   protected void end() {
-    Robot.intake.stopTilt();
+    Robot.intake.wheelsStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.intake.wheelsStop();
   }
 }

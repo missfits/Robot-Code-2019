@@ -8,20 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.subsystems.Elevator.Height;
+import frc.robot.commands.IntakeTilt.TiltPosition;
+import frc.robot.commands.RunIntakeWheels.Direction;
 
-public class PlaceHatch extends CommandGroup {
+public class PickUpBall extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public PlaceHatch(Height h) {
-    addSequential(new Elevate(h));
-    addSequential(new LowerIntakeArm());
-    addSequential(new DriveStraight(3));
-    addSequential(new TimedCommand(0.5));
-    addSequential(new DriveStraight(-5));
-    addSequential(new RaiseIntakeArm());
-    addSequential(new Elevate(Height.BOTTOM_HATCH));
+  public PickUpBall() {
+    addSequential(new IntakeTilt(TiltPosition.BALL_PICKUP));
+    addSequential(new RunIntakeWheels(3, Direction.IN));
+    addSequential(new IntakeTilt(TiltPosition.BALL_SHOOT));
   }
 }

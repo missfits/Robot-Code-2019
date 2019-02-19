@@ -16,7 +16,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class Elevator extends Subsystem {
   final TalonSRX motor1 = new TalonSRX(8);
   final TalonSRX motor2 = new TalonSRX(7);
-
+  public enum Height{
+    BOTTOM_BALL, BOTTOM_HATCH, MIDDLE_BALL, MIDDLE_HATCH, TOP_BALL, TOP_HATCH;
+  }
  
   public void elevate(double speed){
     motor1.set(ControlMode.PercentOutput, speed);
@@ -25,7 +27,7 @@ public class Elevator extends Subsystem {
 
   
   public double getPosition() {
-    return motor1.getSelectedSensorPosition();
+    return motor1.getSelectedSensorPosition()/4096;
   }
  
 

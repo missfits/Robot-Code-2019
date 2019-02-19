@@ -10,29 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IntakeTilt extends Command {
-  boolean goingForward;
-  double targetPosition;
-  public enum TiltPosition {
-    START, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT
-  }
-
-  public IntakeTilt(TiltPosition p) {
-    switch(p){
-      case START:
-        targetPosition = 1;
-        break;
-      case HATCH_PICKUP:
-        targetPosition = 2;
-        break;
-      case BALL_PICKUP:
-        targetPosition = 3;
-        break;
-      case BALL_SHOOT:
-        targetPosition = 4;
-        break;
-    }
-
+public class LowerIntakeArm extends Command {
+  public LowerIntakeArm() {
+    requires(Robot.intake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -40,29 +20,24 @@ public class IntakeTilt extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    goingForward = Robot.intake.getTiltPosition() < targetPosition;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(goingForward){
-      Robot.intake.tiltOut();
-    }else{
-      Robot.intake.tiltIn();
-    }
+    Robot.intake.lowerArm();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return goingForward? Robot.elevator.getPosition() >= targetPosition: Robot.elevator.getPosition() <= targetPosition;
+    return Robot.intake.armIsDown();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopTilt();
+    Robot.intake.stopArm();
   }
 
   // Called when another command which requires one or more of the same

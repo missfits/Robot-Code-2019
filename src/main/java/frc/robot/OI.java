@@ -11,9 +11,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.IntakeTilt;
+import frc.robot.commands.PickUpBall;
+import frc.robot.commands.PickUpHatch;
+import frc.robot.commands.PlaceBall;
+import frc.robot.commands.PlaceHatch;
+import frc.robot.subsystems.Elevator.Height;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
+import frc.robot.commands.Elevate;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,11 +50,12 @@ public class OI {
   public boolean rightTriggerPressed() {return xBox.getRawAxis(3) > 0.2;}
   
   public OI(){
-		aButton.whenPressed(new IntakeTilt(TiltPosition.BACKWARDS));
-		bButton.whenPressed(new IntakeTilt(TiltPosition.ANGLED));
-		xButton.whenPressed(new IntakeTilt(TiltPosition.DOWN));
-		yButton.whenPressed(new IntakeTilt(TiltPosition.UP));
-		leftBumperButton.whenPressed(new ApproachTarget());
+		aButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
+		bButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
+		yButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
+		
+		leftBumperButton.whileHeld(new PickUpBall());
+		rightBumperButton.whileHeld(new PickUpHatch());
 		startButton.whenPressed(new Climb());
   }
 }

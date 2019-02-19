@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,12 +20,32 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  final VictorSP tilt = new VictorSP(10);
-  final VictorSP wheels = new VictorSP(8);
-  final VictorSP arm = new VictorSP(9);
+  final VictorSP tilt = new VictorSP(0);
+  final VictorSP wheels = new VictorSP(2);
+  final VictorSP arm = new VictorSP(1);
+  final AnalogInput harry = new AnalogInput(0);
+  final DigitalInput armLimit = new DigitalInput(0);
 
-public void tilt(double direction){
-  tilt.set(0.5*direction);
+public boolean armIsDown(){
+  return armLimit.get();
+}
+public void raiseArm(){
+  arm.set(0.5);
+}
+public void lowerArm(){
+  arm.set(-0.5);
+}
+public void stopArm(){
+  arm.set(0);
+}
+public void tiltIn(){
+  tilt.set(0.5);
+}
+public void tiltOut(){
+  tilt.set(-0.5);
+}
+public void stopTilt(){
+  tilt.set(0);
 }
 public void wheelsIn(){
   wheels.set(0.5); 
@@ -33,6 +55,9 @@ public void wheelsOut(){
 }
 public void wheelsStop(){
   wheels.set(0);
+}
+public double getTiltPosition(){
+  return harry.getValue();
 }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

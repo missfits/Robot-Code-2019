@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.IntakeTilt;
 import frc.robot.commands.PickUpBall;
 import frc.robot.commands.PickUpHatch;
@@ -37,7 +38,9 @@ public class OI {
 	public Button leftBumperButton = new JoystickButton(xBox,5);
 	public Button rightBumperButton = new JoystickButton(xBox,6);
 	public Button backButton = new JoystickButton(xBox,7);
-  public Button startButton = new JoystickButton(xBox,8);
+	public Button startButton = new JoystickButton(xBox,8);
+	public Button leftTrigger = new xBoxTrigger(xBox, 2);
+	public Button rightTrigger = new xBoxTrigger(xBox, 3);
 
   public double leftStickY(){return -leftStick.getRawAxis(1);}
   public double rightStickY(){return -rightStick.getRawAxis(1);}
@@ -46,13 +49,13 @@ public class OI {
 	public double xBoxLeftStickX() {return xBox.getRawAxis(0);}
 	public double xBoxRightStickY() {return xBox.getRawAxis(5);}
 	public double xBoxRightStickX() {return xBox.getRawAxis(4);}
-	public boolean leftTriggerPressed() {return xBox.getRawAxis(2) > 0.2;}
-  public boolean rightTriggerPressed() {return xBox.getRawAxis(3) > 0.2;}
   
   public OI(){
-		aButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
-		bButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
-		yButton.whenPressed(leftTriggerPressed()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
+		aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
+		bButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
+		yButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
+
+		rightTrigger.whenPressed(new ApproachTarget());
 		
 		leftBumperButton.whileHeld(new PickUpBall());
 		rightBumperButton.whileHeld(new PickUpHatch());

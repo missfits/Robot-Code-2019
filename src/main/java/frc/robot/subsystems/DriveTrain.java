@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import frc.robot.commands.Teleop;
+import frc.robot.commands.TeleopDriveTrain;
 import frc.robot.RobotMap;
 
 /**
@@ -82,6 +82,6 @@ public class DriveTrain extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new Teleop());
+    setDefaultCommand(new TeleopDriveTrain());
   }
 }

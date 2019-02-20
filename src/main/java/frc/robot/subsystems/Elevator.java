@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.robot.commands.TeleopElevator;
 /**
  * Add your docs here.
  */
@@ -33,6 +34,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new TeleopElevator());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

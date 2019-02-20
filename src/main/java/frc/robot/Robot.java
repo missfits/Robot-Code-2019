@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import frc.robot.commands.Teleop;
+import frc.robot.commands.TeleopDriveTrain;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Elevator;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new Teleop());
+    m_chooser.setDefaultOption("Default Auto", new TeleopDriveTrain());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
@@ -129,6 +129,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("Elevator Height (Motor Rotation)", elevator.getPosition());  
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
     SmartDashboard.putNumber("Distance(in)", vision.getDistance());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);

@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
 
   
   public double getPosition() {
-    return motor1.getSelectedSensorPosition();
+    return motor1.getSelectedSensorPosition()/4096;
   }
  
 

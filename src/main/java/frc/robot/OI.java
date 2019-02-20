@@ -38,7 +38,7 @@ public class OI {
 	public Button rightBumperButton = new JoystickButton(xBox,6);
 	public Button backButton = new JoystickButton(xBox,7);
   public Button startButton = new JoystickButton(xBox,8);
-  
+
   public double leftStickY(){return -leftStick.getRawAxis(1);}
   public double rightStickY(){return -rightStick.getRawAxis(1);}
 

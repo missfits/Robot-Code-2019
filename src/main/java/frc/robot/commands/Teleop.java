@@ -28,13 +28,14 @@ public class Teleop extends Command {
   @Override
   protected void execute() {
     Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
-   // Robot.elevator.elevate(-1*Robot.oi.xBoxLeftStickY());
     Robot.elevator.elevate(Robot.oi.xBoxRightStickY());
+    /*Command visionCommand;
     if(Robot.oi.leftTriggerPressed()){
-      ApproachTarget a = new ApproachTarget();
-      a.start();
-    }
-    //Robot.intake.tilt(Math.signum(Robot.oi.xBoxLeftStickY()));
+      visionCommand = new ApproachTarget();
+      visionCommand.start();
+    }else{
+      visionCommand.cancel();
+    }*/
   }
 
   // Make this return true when this Command no longer needs to run execute()

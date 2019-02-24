@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -58,6 +60,9 @@ public class DriveTrain extends Subsystem {
   }
   
   public void tankDrive(double lSpeed, double rSpeed){
+    //System.out.println("Left: " + lSpeed + " Right: " + rSpeed);
+    SmartDashboard.putNumber("Left Speed",lSpeed);
+    SmartDashboard.putNumber("Right Speed",rSpeed);
     frontLeft.set(ControlMode.PercentOutput, lSpeed);
     rearLeft.set(ControlMode.PercentOutput, lSpeed);
     centerLeft.set(ControlMode.PercentOutput, lSpeed);

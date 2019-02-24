@@ -49,5 +49,6 @@ public class OI {
 		aButton.whileHeld(new IntakeArmTest(-1));
 		leftBumperButton.whileHeld(new TestIntakeTilt(1));
 		rightBumperButton.whileHeld(new TestIntakeTilt(-1));
+		xButton.whileHeld(new ApproachTarget());
   }
 }

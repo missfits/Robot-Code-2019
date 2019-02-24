@@ -34,13 +34,13 @@ public class ApproachTarget extends Command {
     //positive offset = steer left
     if(offset < -0.02){
       //System.out.println("going right");
-      Robot.driveTrain.tankDrive(0.5*(1 + 4*Math.abs(Robot.vision.getOffset())), 0.5);
+      Robot.driveTrain.tankDrive(0.2*(1 + 4*Math.abs(Robot.vision.getOffset())), 0.2);
     }else if(offset > 0.02){
       //System.out.println("going left");
-      Robot.driveTrain.tankDrive(0.5, 0.5*(1 + 4*Math.abs(Robot.vision.getOffset())));
+      Robot.driveTrain.tankDrive(0.2, 0.2*(1 + 4*Math.abs(Robot.vision.getOffset())));
     }else{
       //System.out.println("straight");
-      Robot.driveTrain.tankDrive(.5, .5);
+      Robot.driveTrain.tankDrive(.2, .2);
     }
   }
 
@@ -49,7 +49,7 @@ public class ApproachTarget extends Command {
   @Override
   protected boolean isFinished() { 
     SmartDashboard.putNumber("Checking Dist", Robot.vision.getDistance());
-    return Robot.vision.getDistance()<=targetDistance;
+    return Robot.vision.getDistance()<=targetDistance || Robot.vision.getContourNumber() < 2;
    }
 
 
@@ -67,5 +67,6 @@ public class ApproachTarget extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.driveTrain.driveStraight(0);
   }
 }

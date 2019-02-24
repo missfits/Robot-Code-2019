@@ -53,7 +53,9 @@ public class Vision extends Subsystem {
   //double something = Vision.getOffset();
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  public int getContourNumber(){
+    return (int)table.getEntry("Contour Number").getDouble(0);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

@@ -31,16 +31,18 @@ public class ApproachTarget extends Command {
   protected void execute() {
     double offset = Robot.vision.getOffset();
     System.out.println("Offset: " + offset);
+    double distanceMultiplier = (Robot.vision.getDistance() - targetDistance)/50;
+    double baseSpeed = 0.2*distanceMultiplier;
     //positive offset = steer left
     if(offset < -0.02){
       //System.out.println("going right");
-      Robot.driveTrain.tankDrive(0.2*(1 + 4*Math.abs(Robot.vision.getOffset())), 0.2);
+      Robot.driveTrain.tankDrive(baseSpeed*(1 + 4*Math.abs(Robot.vision.getOffset())),baseSpeed);
     }else if(offset > 0.02){
       //System.out.println("going left");
-      Robot.driveTrain.tankDrive(0.2, 0.2*(1 + 4*Math.abs(Robot.vision.getOffset())));
+      Robot.driveTrain.tankDrive(baseSpeed,baseSpeed*(1 + 4*Math.abs(Robot.vision.getOffset())));
     }else{
       //System.out.println("straight");
-      Robot.driveTrain.tankDrive(.2, .2);
+      Robot.driveTrain.tankDrive(baseSpeed, baseSpeed);
     }
   }
 
@@ -58,7 +60,7 @@ public class ApproachTarget extends Command {
   @Override
   protected void end() {
     SmartDashboard.putNumber("Done Driving",Robot.vision.getDistance());
-    System.out.println("Done Approaching Target");
+    System.out.println("Done Approaching Target  due to " + (Robot.vision.getContourNumber() < 2? "contours" : "distance"));
     Robot.driveTrain.driveStraight(0);
     //Robot.vision.setVisionMode(false);
   }

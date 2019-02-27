@@ -31,8 +31,9 @@ public class ApproachTarget extends Command {
   protected void execute() {
     double offset = Robot.vision.getOffset();
     System.out.println("Offset: " + offset);
-    double distanceMultiplier = (Robot.vision.getDistance() - targetDistance)/50;
-    double baseSpeed = 0.2*distanceMultiplier;
+    double distanceMultiplier = Robot.vision.getDistance() > targetDistance? (Robot.vision.getDistance() - targetDistance)/50 : 0;
+    SmartDashboard.putNumber("Distance Multiplier",distanceMultiplier);
+    double baseSpeed = (0.4*distanceMultiplier) >= 0.125 && distanceMultiplier > 0? 0.4*distanceMultiplier : 0.125;
     //positive offset = steer left
     if(offset < -0.02){
       //System.out.println("going right");

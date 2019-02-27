@@ -46,5 +46,6 @@ public class RaiseIntakeArm extends TimedCommand {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

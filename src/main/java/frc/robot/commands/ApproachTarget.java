@@ -6,12 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
+
+import frc.robot.BetterCommand;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ApproachTarget extends Command {
+public class ApproachTarget extends BetterCommand {
   double targetDistance = 18;
   public ApproachTarget() {
     requires(Robot.driveTrain);
@@ -28,7 +30,7 @@ public class ApproachTarget extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void betterExecute() {
     double offset = Robot.vision.getOffset();
     System.out.println("Offset: " + offset);
     double distanceMultiplier = Robot.vision.getDistance() > targetDistance? (Robot.vision.getDistance() - targetDistance)/50 : 0;

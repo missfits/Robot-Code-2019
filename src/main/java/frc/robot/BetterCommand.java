@@ -7,8 +7,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  * Add your docs here.
  */
-public class BetterCommand {
+public abstract class BetterCommand extends Command{
+    protected abstract void betterExecute();
+    protected void execute(){
+        if(!isFinished()){
+            betterExecute();
+        }
+    }
 }

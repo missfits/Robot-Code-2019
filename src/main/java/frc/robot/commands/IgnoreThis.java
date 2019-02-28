@@ -9,8 +9,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.BetterCommand;
 
-public class IgnoreThis extends Command {
+public class IgnoreThis extends BetterCommand {
   public IgnoreThis() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,7 +25,7 @@ public class IgnoreThis extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void betterExecute() {
     System.out.println("execute");
   }
 

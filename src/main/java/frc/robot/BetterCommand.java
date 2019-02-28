@@ -10,7 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Add your docs here.
+ * Like a command... but better
+ * (this is a workaround for the annoying order in command.start() that makes execute() run once before checking isFinished)
  */
 public abstract class BetterCommand extends Command{
     protected abstract void betterExecute();

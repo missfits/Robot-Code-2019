@@ -15,8 +15,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends BetterCommand {
   double targetDistance = 18;
+  double startingDistance;
   public ApproachTarget() {
     requires(Robot.driveTrain);
+    
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
    }
@@ -26,6 +28,7 @@ public class ApproachTarget extends BetterCommand {
   protected void initialize() {
     System.out.println("Starting Approach Target");
     Robot.vision.setVisionMode(true);
+    startingDistance = Robot.vision.getDistance() - targetDistance;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -33,21 +36,35 @@ public class ApproachTarget extends BetterCommand {
   protected void betterExecute() {
     double offset = Robot.vision.getOffset();
     System.out.println("Offset: " + offset);
-    double distanceMultiplier = Robot.vision.getDistance() > targetDistance? (Robot.vision.getDistance() - targetDistance)/50 : 0;
-    SmartDashboard.putNumber("Distance Multiplier",distanceMultiplier);
-    double baseSpeed = (0.4*distanceMultiplier) >= 0.125 && distanceMultiplier > 0? 0.4*distanceMultiplier : 0.125;
+    double distanceMultiplier = (Robot.vision.getDistance() - targetDistance) > 50? 1 : (Robot.vision.getDistance() - targetDistance)/50;
+    //SmartDashboard.putNumber("Distance Multiplier",distanceMultiplier);
+    double baseSpeed = (0.3*distanceMultiplier) >= 0.125 && distanceMultiplier > 0? 0.2*distanceMultiplier : 0.125;
+    double speedVariation = baseSpeed  *(1+ 4*Math.abs(Robot.vision.getOffset()));
+    SmartDashboard.putNumber("Base Speed",baseSpeed);
+    SmartDashboard.putNumber("Speed Variation",speedVariation);
+    System.out.println("Base Speed: " + baseSpeed + " Speed Variation: " + speedVariation);
     //positive offset = steer left
+  
     if(offset < -0.02){
       //System.out.println("going right");
-      Robot.driveTrain.tankDrive(baseSpeed*(1 + 4*Math.abs(Robot.vision.getOffset())),baseSpeed);
+      Robot.driveTrain.tankDrive(speedVariation, baseSpeed);
+      /*if(speedVariation > .5){
+        speedVariation = .2;
+        baseSpeed = .3;
+      }*/
     }else if(offset > 0.02){
       //System.out.println("going left");
-      Robot.driveTrain.tankDrive(baseSpeed,baseSpeed*(1 + 4*Math.abs(Robot.vision.getOffset())));
+      Robot.driveTrain.tankDrive(baseSpeed, speedVariation);
+      if(speedVariation > .5){
+        speedVariation = .3;
+        baseSpeed = .2;
+      }
     }else{
       //System.out.println("straight");
       Robot.driveTrain.tankDrive(baseSpeed, baseSpeed);
     }
-  }
+    
+   }
 
   // Make this return true when this Command no longer needs to run execute()
 

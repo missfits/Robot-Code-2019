@@ -38,7 +38,7 @@ public class ApproachTarget extends BetterCommand {
     System.out.println("Offset: " + offset);
     double distanceMultiplier = (Robot.vision.getDistance() - targetDistance) > 50? 1 : (Robot.vision.getDistance() - targetDistance)/50;
     //SmartDashboard.putNumber("Distance Multiplier",distanceMultiplier);
-    double baseSpeed = (0.3*distanceMultiplier) >= 0.125 && distanceMultiplier > 0? 0.2*distanceMultiplier : 0.125;
+    double baseSpeed = (0.3*distanceMultiplier) >= 0.15 && distanceMultiplier > 0? 0.3*distanceMultiplier : 0.15;
     double speedVariation = baseSpeed  *(1+ 4*Math.abs(Robot.vision.getOffset()));
     SmartDashboard.putNumber("Base Speed",baseSpeed);
     SmartDashboard.putNumber("Speed Variation",speedVariation);

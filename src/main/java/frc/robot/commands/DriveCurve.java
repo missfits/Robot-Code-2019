@@ -24,39 +24,43 @@ public class DriveCurve extends Command {
   protected void initialize() {
     System.out.println("Running Drive Curve");
     double[][] autoPath = new double[][] {
-      {0, 4},
+      /*{0, 4},
       {5.5, 9},
-      {3.5, 14.5}
+      {3.5, 14.5}*/
+      {0,4},
+      {4,7},
+      {2, 9}
     };
 
     double totalTime = 5;
-    double timeStep = 0.2;
+    double timeStep = 0.02;
     double robotTrackWidth = 2;
 
     pathPlanner = new FalconPathPlanner(autoPath);
     pathPlanner.calculate(totalTime, timeStep, robotTrackWidth);
     step = 0;
-    System.out.println("Left Velocity: " + pathPlanner.smoothLeftVelocity[0][1]);
-    System.out.println("Right Velocity: " + pathPlanner.smoothRightVelocity[0][1]);
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*Robot.driveTrain.tankDrive(pathPlanner.smoothLeftVelocity[step][1], pathPlanner.smoothRightVelocity[step][1]);
-    step++;*/
+    System.out.println("Left Velocity: " + pathPlanner.smoothLeftVelocity[step][1] + " Right Velocity: " + pathPlanner.smoothRightVelocity[step][1]);
+    Robot.driveTrain.tankDrive(pathPlanner.smoothLeftVelocity[step][1], pathPlanner.smoothRightVelocity[step][1]);
+    step++;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
-    //return step == pathPlanner.smoothLeftVelocity.length;
+   // return true;
+    return step == pathPlanner.smoothLeftVelocity.length;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println("done curving");
     Robot.driveTrain.driveStraight(0);
   }
 
@@ -64,5 +68,6 @@ public class DriveCurve extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

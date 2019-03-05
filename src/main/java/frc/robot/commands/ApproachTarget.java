@@ -9,16 +9,19 @@ package frc.robot.commands;
 
 import frc.robot.BetterCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Vision.TargetSpot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ApproachTarget extends BetterCommand {
-  double targetDistance = 18;
+  double targetDistance;
   double startingDistance;
-  public ApproachTarget() {
+  TargetSpot target;
+  public ApproachTarget(TargetSpot t) {
     requires(Robot.driveTrain);
-    
+    target = t;
+    targetDistance = t==TargetSpot.CENTER? 18 : 48;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
    }
@@ -34,12 +37,12 @@ public class ApproachTarget extends BetterCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void betterExecute() {
-    double offset = Robot.vision.getOffset();
+    double offset = Robot.vision.getOffset(target);
     System.out.println("Offset: " + offset);
     double distanceMultiplier = (Robot.vision.getDistance() - targetDistance) > 50? 1 : (Robot.vision.getDistance() - targetDistance)/50;
     //SmartDashboard.putNumber("Distance Multiplier",distanceMultiplier);
     double baseSpeed = (0.3*distanceMultiplier) >= 0.15 && distanceMultiplier > 0? 0.3*distanceMultiplier : 0.15;
-    double speedVariation = baseSpeed  *(1+ 4*Math.abs(Robot.vision.getOffset()));
+    double speedVariation = baseSpeed  *(1+ 4*Math.abs(Robot.vision.getOffset(target)));
     SmartDashboard.putNumber("Base Speed",baseSpeed);
     SmartDashboard.putNumber("Speed Variation",speedVariation);
     System.out.println("Base Speed: " + baseSpeed + " Speed Variation: " + speedVariation);

@@ -12,10 +12,13 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.commands.TestIntakeTilt;
+import frc.robot.commands.TurnApproachTarget;
 import frc.robot.commands.IntakeTilt.TiltPosition;
+import frc.robot.subsystems.Vision.TargetSpot;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
 import frc.robot.commands.DriveCurve;
+import frc.robot.commands.FancyAlign;
 import frc.robot.commands.IgnoreThis;
 import frc.robot.commands.IntakeArmTest;
 /**
@@ -48,10 +51,11 @@ public class OI {
   
   public OI(){
 		yButton.whileHeld(new IntakeArmTest(1));
-		aButton.whileHeld(new IntakeArmTest(-1));
+		//aButton.whileHeld(new IntakeArmTest(-1));
 		leftBumperButton.whileHeld(new TestIntakeTilt(1));
 		rightBumperButton.whileHeld(new TestIntakeTilt(-1));
-		xButton.whileHeld(new ApproachTarget());
-		bButton.whileHeld(new IgnoreThis());
+		xButton.whileHeld(new ApproachTarget(TargetSpot.CENTER));
+		bButton.whileHeld(new TurnApproachTarget());
+		aButton.whileHeld(new FancyAlign());
   }
 }

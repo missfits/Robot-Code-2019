@@ -8,16 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.subsystems.Vision.TargetSpot;
 
-public class PlaceHatch extends CommandGroup {
+public class TurnApproachTarget extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public PlaceHatch() {
-    //addSequential(new ApproachTarget());
-    addSequential(new DriveStraight(12));
-    
-
+  public TurnApproachTarget() {
+    addSequential(new TurnToAlign());
+    addSequential(new ApproachTarget(TargetSpot.CENTER));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

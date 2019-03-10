@@ -39,19 +39,22 @@ public void stopArm(){
   arm.set(0);
 }
 public void tiltIn(){
-  tilt.set(0.5);
+  tilt.set(-0.7);
 }
 public void tiltOut(){
-  tilt.set(-0.5);
+  tilt.set(0.7);
+}
+public void testTilt(double speed){
+  tilt.set(speed);
 }
 public void stopTilt(){
   tilt.set(0);
 }
 public void wheelsIn(){
-  wheels.set(0.5); 
+  wheels.set(-1); 
 }
 public void wheelsOut(){
-  wheels.set(-0.5);
+  wheels.set(1);
 }
 public void wheelsStop(){
   wheels.set(0);

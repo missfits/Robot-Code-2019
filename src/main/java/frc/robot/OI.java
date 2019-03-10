@@ -59,12 +59,12 @@ public class OI {
 		//aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
 		//bButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
 		//yButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
-		aButton.whenPressed(new IntakeTilt(TiltPosition.BALL_PICKUP));
-		yButton.whenPressed(new IntakeTilt(TiltPosition.HATCH_PICKUP));
-		bButton.whenPressed(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
-		startButton.whenPressed(new Climb());
-		leftTrigger.whenPressed(new RunIntakeWheels(Direction.IN));
-		rightTrigger.whenPressed(new RunIntakeWheels(Direction.OUT));
+		aButton.whileHeld(new IntakeTilt(TiltPosition.BALL_PICKUP));
+		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
+		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
+		startButton.whileHeld(new Climb());
+		leftTrigger.whileHeld(new RunIntakeWheels(Direction.IN));
+		rightTrigger.whileHeld(new RunIntakeWheels(Direction.OUT));
 		leftBumperButton.whileHeld(new RunIntakeArm(ArmDirection.UP));
 		rightBumperButton.whileHeld(new RunIntakeArm(ArmDirection.DOWN));
 

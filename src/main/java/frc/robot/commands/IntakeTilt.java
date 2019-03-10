@@ -8,9 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.BetterCommand;
 import frc.robot.Robot;
 
-public class IntakeTilt extends Command {
+public class IntakeTilt extends BetterCommand {
   boolean goingForward;
   double targetPosition;
   public enum TiltPosition {
@@ -20,16 +21,16 @@ public class IntakeTilt extends Command {
   public IntakeTilt(TiltPosition p) {
     switch(p){
       case CLIMBING:
-        targetPosition = 1;
+        targetPosition = 705;
         break;
       case HATCH_PICKUP:
-        targetPosition = 2;
+        targetPosition = 85;
         break;
       case BALL_PICKUP:
-        targetPosition = 3;
+        targetPosition = 420;
         break;
       case BALL_SHOOT_POSITION:
-        targetPosition = 4;
+        targetPosition = 300;
         break;
     }
 
@@ -45,7 +46,7 @@ public class IntakeTilt extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void betterExecute() {
     if(goingForward){
       Robot.intake.tiltOut();
     }else{

@@ -17,7 +17,7 @@ public class PlaceBall extends CommandGroup {
    */
   public PlaceBall(Height h) {
     addSequential(new Elevate(h));
-    addSequential(new RunIntakeWheels(3, Direction.OUT));
+    addSequential(new RunIntakeWheels(Direction.OUT));
     addSequential(new Elevate(Height.BOTTOM_HATCH));
     // Add Commands here:
     // e.g. addSequential(new Command1());

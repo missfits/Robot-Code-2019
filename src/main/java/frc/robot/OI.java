@@ -18,9 +18,12 @@ import frc.robot.commands.PlaceBall;
 import frc.robot.commands.PlaceHatch;
 import frc.robot.subsystems.Elevator.Height;
 import frc.robot.commands.IntakeTilt.TiltPosition;
+import frc.robot.commands.RunIntakeWheels.Direction;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
+import frc.robot.commands.RunIntakeWheels;;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,14 +54,19 @@ public class OI {
 	public double xBoxRightStickX() {return xBox.getRawAxis(4);}
   
   public OI(){
-		aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
-		bButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
-		yButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
+		//aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
+		//bButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
+		//yButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
+		aButton.whenPressed(new IntakeTilt(TiltPosition.BALL_PICKUP));
+		yButton.whenPressed(new IntakeTilt(TiltPosition.HATCH_PICKUP));
+		bButton.whenPressed(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
+		startButton.whenPressed(new Climb());
+		leftTrigger.whenPressed(new RunIntakeWheels(Direction.IN));
+		rightTrigger.whenPressed(new RunIntakeWheels(Direction.OUT));
+		leftBumperButton.whileHeld(new );
 
-		rightTrigger.whenPressed(new ApproachTarget());
-		
 		leftBumperButton.whileHeld(new PickUpBall());
 		rightBumperButton.whileHeld(new PickUpHatch());
-		startButton.whenPressed(new Climb());
+		
   }
 }

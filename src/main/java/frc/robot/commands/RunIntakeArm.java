@@ -8,22 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class RunIntakeWheels extends Command {
-  public enum Direction{
-    IN, OUT
+public class RunIntakeArm extends Command {
+  public enum ArmDirection{
+    UP, DOWN
   }
-  /**
-   * Add your docs here.
-   */
-  public Direction direction;
-  public RunIntakeWheels( Direction d) {
-    direction = d;
+
+  public ArmDirection armDirection;
+  //public 
+
+  public RunIntakeArm() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -36,28 +30,22 @@ public class RunIntakeWheels extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == Direction.IN){
-      Robot.intake.wheelsIn();
-    }else{
-      Robot.intake.wheelsOut();
-    }
-    
   }
+
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after timeout
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.wheelsStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.intake.wheelsStop();
   }
 }

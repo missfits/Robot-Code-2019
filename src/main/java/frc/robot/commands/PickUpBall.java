@@ -17,7 +17,7 @@ public class PickUpBall extends CommandGroup {
    */
   public PickUpBall() {
     addSequential(new IntakeTilt(TiltPosition.BALL_PICKUP));
-    addSequential(new RunIntakeWheels(3, Direction.IN));
-    addSequential(new IntakeTilt(TiltPosition.BALL_SHOOT));
+    addSequential(new RunIntakeWheels(Direction.IN));
+    addSequential(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
   }
 }

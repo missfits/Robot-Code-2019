@@ -14,12 +14,12 @@ public class IntakeTilt extends Command {
   boolean goingForward;
   double targetPosition;
   public enum TiltPosition {
-    START, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT
+    CLIMBING, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT_POSITION
   }
-
+  //Positions: UP(hatch pickup), 45 degrees or less (ball pickup), a little higher than 45 degrees (ball carrying/shooting) DOWN further than horizontal (climbing)
   public IntakeTilt(TiltPosition p) {
     switch(p){
-      case START:
+      case CLIMBING:
         targetPosition = 1;
         break;
       case HATCH_PICKUP:
@@ -28,7 +28,7 @@ public class IntakeTilt extends Command {
       case BALL_PICKUP:
         targetPosition = 3;
         break;
-      case BALL_SHOOT:
+      case BALL_SHOOT_POSITION:
         targetPosition = 4;
         break;
     }

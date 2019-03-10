@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.TimedCommand;
+import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.MoveClimber.Direction;
 
 public class Climb extends CommandGroup {
@@ -16,6 +17,7 @@ public class Climb extends CommandGroup {
    * Add your docs here.
    */
   public Climb() {
+    addSequential(new IntakeTilt(TiltPosition.CLIMBING));
     addSequential(new DeployArms());
     addParallel(new DriveStraight(1234567890));
     addSequential(new TimedCommand(2));

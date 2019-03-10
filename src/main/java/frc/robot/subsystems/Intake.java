@@ -23,7 +23,7 @@ public class Intake extends Subsystem {
   final VictorSP tilt = new VictorSP(0);
   final VictorSP wheels = new VictorSP(2);
   final VictorSP arm = new VictorSP(1);
-  final AnalogInput harry = new AnalogInput(0);
+  final AnalogInput harry = new AnalogInput(1);
   final DigitalInput armLimit = new DigitalInput(0);
 
 public boolean armIsDown(){

@@ -18,7 +18,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Climber;;
+import frc.robot.subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -132,6 +132,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Elevator Height (Motor Rotation)", elevator.getPosition());  
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
     SmartDashboard.putNumber("Distance(in)", vision.getDistance());
+    System.out.println(Robot.intake.getTiltPosition());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
     //System.out.println("Offset: " + vision.getOffset());
 

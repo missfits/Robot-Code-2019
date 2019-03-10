@@ -27,7 +27,7 @@ public void tiltUp(int direction){
 }
 
 public void armUp(int direction){
-  arm.set(direction * 0.4);
+  arm.set(direction * 1);
 }
 
 public void wheelsIn(){

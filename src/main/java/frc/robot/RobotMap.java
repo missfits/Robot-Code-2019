@@ -25,12 +25,12 @@ public class RobotMap {
 
   
   //2018 bot
- public static int frontLeft = 2;
-  public static int rearLeft = 3;
-  public static int frontRight = 1;
-  public static int rearRight = 4;
-  public static int centerLeft = 6;
-  public static int centerRight = 7;
+ public static int frontLeft = 1;
+  public static int rearLeft = 5;
+  public static int frontRight = 3;
+  public static int rearRight = 2;
+  public static int centerLeft = 4;
+  public static int centerRight = 0;
   
 
   // If you are using multiple modules, make sure to define both the port

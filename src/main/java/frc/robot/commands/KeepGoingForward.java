@@ -7,14 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.BetterCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Vision.TargetSpot;
 
-public class TurnToAlign extends BetterCommand {
-  public TurnToAlign() {
-    requires(Robot.driveTrain);
+public class KeepGoingForward extends Command {
+  public KeepGoingForward() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -26,35 +23,25 @@ public class TurnToAlign extends BetterCommand {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void betterExecute() {
-    double distFromTargetOffset = Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - 0.03;
-    double accelerationMultiplier = distFromTargetOffset < 0.25? distFromTargetOffset/0.25 : 1;
-    double speed = 0.25 * accelerationMultiplier >= 0.15? 0.25*accelerationMultiplier: 0.15;
-    SmartDashboard.putNumber("Turn Speed",speed);
-    if(Robot.vision.getOffset(TargetSpot.CENTER) >  0){
-      Robot.driveTrain.tankDrive(-speed,speed);
-    }else{
-      Robot.driveTrain.tankDrive(speed, -speed);
-    }
+  protected void execute() {
+    Robot.driveTrain.driveStraight(0.2);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.vision.getOffset(TargetSpot.CENTER))<= 0.03 || Robot.vision.getContourNumber() < 2;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.println("ending turn");
-    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    Robot.driveTrain.driveStraight(0);
   }
 }

@@ -61,6 +61,7 @@ public class DriveTrain extends Subsystem {
   
   public void tankDrive(double lSpeed, double rSpeed){
     //System.out.println("Left: " + lSpeed + " Right: " + rSpeed);
+    System.out.println("tank l: " + lSpeed + " r: " + rSpeed);
     SmartDashboard.putNumber("Left Speed",lSpeed);
     SmartDashboard.putNumber("Right Speed",rSpeed);
     frontLeft.set(ControlMode.PercentOutput, lSpeed);

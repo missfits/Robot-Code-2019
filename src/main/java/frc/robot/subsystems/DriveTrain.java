@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -39,6 +41,7 @@ public class DriveTrain extends Subsystem {
     frontRight.follow(frontLeft);
 
     frontRight.setInverted(true);
+    centerRight.setInverted(true);
     rearRight.setInverted(true);
    /* rearLeft.setInverted(InvertType.FollowMaster);
     centerLeft.setInverted(InvertType.FollowMaster);
@@ -64,6 +67,8 @@ public class DriveTrain extends Subsystem {
 		frontRight.set(ControlMode.PercentOutput, rSpeed);
     rearRight.set(ControlMode.PercentOutput, rSpeed);
     centerRight.set(ControlMode.PercentOutput, rSpeed);
+    SmartDashboard.putNumber("L: ", lSpeed);
+    SmartDashboard.putNumber("R: ",  rSpeed);
   }
 
   public double getLeftPosition() {

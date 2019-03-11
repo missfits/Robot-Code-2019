@@ -30,10 +30,10 @@ public boolean armIsDown(){
   return armLimit.get();
 }
 public void raiseArm(){
-  arm.set(0.5);
+  arm.set(1);
 }
 public void lowerArm(){
-  arm.set(-0.5);
+  arm.set(-1);
 }
 public void stopArm(){
   arm.set(0);

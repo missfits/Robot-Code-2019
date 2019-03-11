@@ -18,13 +18,16 @@ import frc.robot.commands.PlaceBall;
 import frc.robot.commands.PlaceHatch;
 import frc.robot.commands.RunIntakeArm;
 import frc.robot.subsystems.Elevator.Height;
+import frc.robot.subsystems.Vision.TargetSpot;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.RunIntakeArm.ArmDirection;
 import frc.robot.commands.RunIntakeWheels.Direction;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
-import frc.robot.commands.RunIntakeWheels;;
+import frc.robot.commands.RunIntakeWheels;
+import frc.robot.commands.TurnApproachTarget;
+import frc.robot.commands.TurnToAlign;;
 
 
 /**
@@ -62,7 +65,9 @@ public class OI {
 		aButton.whileHeld(new IntakeTilt(TiltPosition.BALL_PICKUP));
 		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
 		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
-		startButton.whileHeld(new Climb());
+		//startButton.whileHeld(new Climb());
+		startButton.whenPressed(new TurnToAlign());
+		//backButton.whileHeld(new TurnApproachTarget());
 		leftTrigger.whileHeld(new RunIntakeWheels(Direction.IN));
 		rightTrigger.whileHeld(new RunIntakeWheels(Direction.OUT));
 		leftBumperButton.whileHeld(new RunIntakeArm(ArmDirection.UP));

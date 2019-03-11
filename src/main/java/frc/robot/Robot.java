@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("Elevator Height (Motor Rotation)", elevator.getPosition());  
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
-    SmartDashboard.putNumber("Distance(in)", vision.getDistance());
+    System.out.println("Distance(in)" + vision.getDistance());
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Intake Tilt",intake.getTiltPosition());
     System.out.println(Robot.intake.getTiltPosition());

@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.Relay.Value;
  * Add your docs here.
  */
 public class Vision extends Subsystem {
+  public enum TargetSpot{
+    SIDE, CENTER
+  }
  // double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
   private NetworkTable table;
   private AnalogInput ultrasonic = new AnalogInput(0);
@@ -47,20 +50,15 @@ public class Vision extends Subsystem {
       light.set(Value.kOff);
     }
   }
-  public boolean getVisionMode(){
-    return table.getEntry("Vision Mode").getBoolean(false);
-  }
-  public double getOffset(){
-    return table.getEntry("Offset").getDouble(0);
+  public double getOffset(TargetSpot target){
+    return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 
-
-  public double getContourNum(){
-    return table.getEntry("Contour Number").getDouble(0);
-  }
   //double something = Vision.getOffset();
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  public int getContourNumber(){
+    return (int)table.getEntry("Contour Number").getDouble(0);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

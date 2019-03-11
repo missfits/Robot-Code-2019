@@ -7,33 +7,14 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.BetterCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Vision.TargetSpot;
 
-public class IntakeTilt extends BetterCommand {
-  boolean goingForward;
-  double targetPosition;
-  public enum TiltPosition {
-    CLIMBING, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT_POSITION
-  }
-  //Positions: UP(hatch pickup), 45 degrees or less (ball pickup), a little higher than 45 degrees (ball carrying/shooting) DOWN further than horizontal (climbing)
-  public IntakeTilt(TiltPosition p) {
-    switch(p){
-      case CLIMBING:
-        targetPosition = 705;
-        break;
-      case HATCH_PICKUP:
-        targetPosition = 85;
-        break;
-      case BALL_PICKUP:
-        targetPosition = 420;
-        break;
-      case BALL_SHOOT_POSITION:
-        targetPosition = 300;
-        break;
-    }
-
+public class TurnToAlign extends BetterCommand {
+  public TurnToAlign() {
+    requires(Robot.driveTrain);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -41,29 +22,33 @@ public class IntakeTilt extends BetterCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    goingForward = Robot.intake.getTiltPosition() < targetPosition;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void betterExecute() {
-    if(goingForward){
-      Robot.intake.tiltOut();
+    double distFromTargetOffset = Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - 0.03;
+    double accelerationMultiplier = distFromTargetOffset < 0.25? distFromTargetOffset/0.25 : 1;
+    double speed = 0.25 * accelerationMultiplier >= 0.15? 0.25*accelerationMultiplier: 0.15;
+    SmartDashboard.putNumber("Turn Speed",speed);
+    if(Robot.vision.getOffset(TargetSpot.CENTER) >  0){
+      Robot.driveTrain.tankDrive(-speed,speed);
     }else{
-      Robot.intake.tiltIn();
+      Robot.driveTrain.tankDrive(speed, -speed);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return goingForward? Robot.intake.getTiltPosition() >= targetPosition: Robot.intake.getTiltPosition() <= targetPosition;
+    return Math.abs(Robot.vision.getOffset(TargetSpot.CENTER))<= 0.03 || Robot.vision.getContourNumber() < 2;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopTilt();
+    System.out.println("ending turn");
+    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same

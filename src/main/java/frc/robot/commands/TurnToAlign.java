@@ -13,8 +13,10 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Vision.TargetSpot;
 
 public class TurnToAlign extends BetterCommand {
+  double startingOffset,deadband;
   public TurnToAlign() {
     requires(Robot.driveTrain);
+    deadband = 0.02;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -22,16 +24,22 @@ public class TurnToAlign extends BetterCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    //Robot.vision.setVisionMode(true);
+    startingOffset = Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - deadband;
+    SmartDashboard.putNumber("Starting Offset",startingOffset);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void betterExecute() {
-    double distFromTargetOffset = Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - 0.03;
-    double accelerationMultiplier = distFromTargetOffset < 0.25? distFromTargetOffset/0.25 : 1;
-    double speed = 0.25 * accelerationMultiplier >= 0.15? 0.25*accelerationMultiplier: 0.15;
+    System.out.println("Offset: " + Robot.vision.getOffset(TargetSpot.CENTER));
+    //double distFromTargetOffset = Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - 0.03;
+    //double offsetDiff = Robot.vision.getOffset(TargetSpot.CENTER) 
+    double accelerationMultiplier = (Math.abs(Robot.vision.getOffset(TargetSpot.CENTER)) - deadband)/startingOffset;
+    double speed =  0.1*accelerationMultiplier;
     SmartDashboard.putNumber("Turn Speed",speed);
-    if(Robot.vision.getOffset(TargetSpot.CENTER) >  0){
+    System.out.println("Turn Speed: " + speed + " Acceleration Multiplier: " + accelerationMultiplier);
+    if(Robot.vision.getOffset(TargetSpot.CENTER) > 0){
       Robot.driveTrain.tankDrive(-speed,speed);
     }else{
       Robot.driveTrain.tankDrive(speed, -speed);
@@ -41,12 +49,13 @@ public class TurnToAlign extends BetterCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.vision.getOffset(TargetSpot.CENTER))<= 0.03 || Robot.vision.getContourNumber() < 2;
+    return Math.abs(Robot.vision.getOffset(TargetSpot.CENTER))<=deadband || Robot.vision.getContourNumber() < 2;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+   // Robot.vision.setVisionMode(false);
     System.out.println("ending turn");
     Robot.driveTrain.driveStraight(0);
   }

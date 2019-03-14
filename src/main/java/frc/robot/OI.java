@@ -24,10 +24,13 @@ import frc.robot.commands.RunIntakeArm.ArmDirection;
 import frc.robot.commands.RunIntakeWheels.Direction;
 import frc.robot.commands.ApproachTarget;
 import frc.robot.commands.Climb;
+import frc.robot.commands.ControlledApproachTarget;
+import frc.robot.commands.ControlledDriveStraight;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.RunIntakeWheels;
 import frc.robot.commands.TurnApproachTarget;
-import frc.robot.commands.TurnToAlign;;
+import frc.robot.commands.TurnToAlign;
+import frc.robot.commands.FlipVisionMode;;
 
 
 /**
@@ -47,8 +50,14 @@ public class OI {
 	public Button rightBumperButton = new JoystickButton(xBox,6);
 	public Button backButton = new JoystickButton(xBox,7);
 	public Button startButton = new JoystickButton(xBox,8);
-	public Button leftTrigger = new xBoxTrigger(xBox, 2);
-	public Button rightTrigger = new xBoxTrigger(xBox, 3);
+	public Button xBoxLeftTrigger = new xBoxTrigger(xBox, 2);
+	public Button xBoxRightTrigger = new xBoxTrigger(xBox, 3);
+
+	public Button rightStickTrigger = new JoystickButton(rightStick,1);
+	public Button rightStickThumbButton = new JoystickButton(rightStick,2);
+	public Button rightStick4 = new JoystickButton(rightStick,4);
+
+	public Button leftStick12 = new JoystickButton(leftStick, 12);
 
   public double leftStickY(){return -leftStick.getRawAxis(1);}
   public double rightStickY(){return -rightStick.getRawAxis(1);}
@@ -68,13 +77,15 @@ public class OI {
 		//startButton.whileHeld(new Climb());
 		startButton.whenPressed(new TurnToAlign());
 		//backButton.whileHeld(new TurnApproachTarget());
-		leftTrigger.whileHeld(new RunIntakeWheels(Direction.IN));
-		rightTrigger.whileHeld(new RunIntakeWheels(Direction.OUT));
+		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(Direction.IN));
+		xBoxRightTrigger.whileHeld(new RunIntakeWheels(Direction.OUT));
 		leftBumperButton.whileHeld(new RunIntakeArm(ArmDirection.UP));
 		rightBumperButton.whileHeld(new RunIntakeArm(ArmDirection.DOWN));
 
-		/*leftBumperButton.whileHeld(new PickUpBall());
-		rightBumperButton.whileHeld(new PickUpHatch());*/
+		rightStickTrigger.whileHeld(new ControlledDriveStraight());
+		rightStickThumbButton.whenPressed(new ControlledApproachTarget());
+		rightStick4.whenPressed(new FlipVisionMode());
+		
 		
   }
 }

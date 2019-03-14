@@ -26,12 +26,6 @@ public class Vision extends Subsystem {
   private NetworkTable table;
   private AnalogInput ultrasonic = new AnalogInput(0);
   private Relay light = new Relay(0);
-
-  
-  /*public void convertDistance(int distanceInBits){
-    int bitToMillimeters = distanceInBits * 5;
-    System.out.println(bitToMillimeters);
-  } */
   
   public double getDistance(){
     //units is in inches (idk why it's supposed to be in mm)
@@ -53,6 +47,9 @@ public class Vision extends Subsystem {
   public double getOffset(TargetSpot target){
     return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 
+  public boolean getVisionMode(){
+    return table.getEntry("Vision Mode").getBoolean(false);
+  }
   //double something = Vision.getOffset();
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

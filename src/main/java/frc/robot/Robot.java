@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    System.out.println(oi.xBoxLeftStickY());
+    //System.out.println(oi.xBoxLeftStickY());
   }
 
   /**
@@ -132,12 +132,12 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("Elevator Height (Motor Rotation)", elevator.getPosition());  
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
-    System.out.println("Distance(in)" + vision.getDistance());
+   // System.out.println("Distance(in)" + vision.getDistance());
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Intake Tilt",intake.getTiltPosition());
-    System.out.println(Robot.intake.getTiltPosition());
+    //System.out.println(Robot.intake.getTiltPosition());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
-    //Syste\m.out.println("Offset: " + vision.getOffset());
+    //System.out.println("Offset: " + vision.getOffset());
 
   }
 

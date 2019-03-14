@@ -8,31 +8,43 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.BetterCommand;
 import frc.robot.Robot;
 
-public class ApproachWall extends BetterCommand {
-  public ApproachWall() {
+public class ControlledDriveStraight extends Command {
+  double goalAngle;
+  public ControlledDriveStraight() {
     requires(Robot.driveTrain);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
 
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    goalAngle = Math.abs(Robot.driveTrain.getAngle());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void betterExecute() {
-    Robot.driveTrain.driveStraight(0.65);
+  protected void execute() {
+    double baseSpeed = (Robot.oi.leftStickY() + Robot.oi.rightStickY())/2;
+    //double angleDiff = Robot.driveTrain.getAngle() - goalAngle;
+   // if(angleDiff > 0){
+      //turn left
+      Robot.driveTrain.tankDrive(baseSpeed, baseSpeed);
+    //}
+    //double angleDiffMultipier = (goalAngle - Robot.driveTrain.getAngle())/
+    //if(Robot.driveTrain.getAngle() > goalAngle){
+
+    //}
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.vision.getDistance() <= 24;
+    return false;
   }
+
   // Called once after isFinished returns true
   @Override
   protected void end() {

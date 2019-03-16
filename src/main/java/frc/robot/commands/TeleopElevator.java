@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class TeleopElevator extends Command {
@@ -23,7 +24,8 @@ public class TeleopElevator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.elevate(Robot.oi.xBoxRightStickY());
+    Robot.elevator.elevate(Math.abs(Robot.oi.xBoxRightStickY()) > 0.2 ? Robot.oi.xBoxRightStickY() : 0);
+    //SmartDashboard.putNumber("Elevator Position", Robot.elevator.getPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()

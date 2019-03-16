@@ -15,14 +15,16 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.TeleopIntake;
 
 /**
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  final VictorSP tilt = new VictorSP(0);
-  final VictorSP wheels = new VictorSP(2);
-  final VictorSP arm = new VictorSP(1);
+  final VictorSP tilt = new VictorSP(RobotMap.intakeTilt);
+  final VictorSP wheels = new VictorSP(RobotMap.intakeWheels);
+  final VictorSP arm = new VictorSP(RobotMap.intakeArm);
   final AnalogInput harry = new AnalogInput(1);
   final DigitalInput armLimit = new DigitalInput(0);
 
@@ -38,11 +40,11 @@ public void lowerArm(){
 public void stopArm(){
   arm.set(0);
 }
-public void tiltIn(){
-  tilt.set(-0.7);
+public void tiltIn(double speed){
+  tilt.set(-speed);
 }
-public void tiltOut(){
-  tilt.set(0.7);
+public void tiltOut(double speed){
+  tilt.set(speed);
 }
 public void testTilt(double speed){
   tilt.set(speed);
@@ -67,6 +69,7 @@ public double getTiltPosition(){
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new TeleopIntake());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

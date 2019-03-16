@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DeployArms extends Command {
-  public DeployArms() {
-  
+public class TeleopIntake extends Command {
+  public TeleopIntake() {
+    requires(Robot.intake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,25 +20,28 @@ public class DeployArms extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climber.deployArms();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
+      Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
+    }else{
+      Robot.intake.stopTilt();
+    }
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-     }
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

@@ -130,7 +130,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("Elevator Height (Motor Rotation)", elevator.getPosition());  
+    SmartDashboard.putNumber("Elevator Height", elevator.getPosition());  
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
    // System.out.println("Distance(in)" + vision.getDistance());
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());

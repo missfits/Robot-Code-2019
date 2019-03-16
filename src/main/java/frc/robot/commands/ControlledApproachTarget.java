@@ -21,6 +21,7 @@ public class ControlledApproachTarget extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("Approach Target Init");
     Robot.vision.setVisionMode(true);
   }
 

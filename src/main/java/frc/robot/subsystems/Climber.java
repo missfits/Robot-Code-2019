@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -18,9 +20,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
  * Add your docs here.
  */
 public class Climber extends Subsystem {
-  final VictorSPX motor1 = new VictorSPX(0);
-  final VictorSPX motor2 = new VictorSPX(1);
-  final Servo arms = new Servo(3);
+  final VictorSPX motor1 = new VictorSPX(RobotMap.climber1);
+  final VictorSPX motor2 = new VictorSPX(RobotMap.climber2);
   final DigitalInput topLimitSwitch = new DigitalInput(1);
   final DigitalInput bottomLimitSwitch = new DigitalInput(2);
   //arms will be run by servos
@@ -29,10 +30,7 @@ public class Climber extends Subsystem {
     motor1.set(ControlMode.PercentOutput, speed);
     motor2.set(ControlMode.PercentOutput, speed);
   }
-
-  public void deployArms(){
-    arms.set(1);
-  }
+  
   public boolean reachedTop(){
     return topLimitSwitch.get();
   }

@@ -27,11 +27,6 @@ public class TeleopDriveTrain extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
-    }else{
-      Robot.intake.stopTilt();
-    }
     Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
   }
 

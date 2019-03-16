@@ -10,13 +10,21 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.InvertType;
+
+import frc.robot.RobotMap;
 import frc.robot.commands.TeleopElevator;
 /**
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  final TalonSRX motor1 = new TalonSRX(8);
-  final TalonSRX motor2 = new TalonSRX(7);
+  final TalonSRX motor1 = new TalonSRX(RobotMap.elevator1);
+  final TalonSRX motor2 = new TalonSRX(RobotMap.elevator2);
+
+  public Elevator(){
+    motor1.setInverted(true);
+    motor2.setInverted(true);
+  }
   public enum Height{
     BOTTOM_BALL, BOTTOM_HATCH, MIDDLE_BALL, MIDDLE_HATCH, TOP_BALL, TOP_HATCH;
   }
@@ -28,7 +36,7 @@ public class Elevator extends Subsystem {
 
   
   public double getPosition() {
-    return motor1.getSelectedSensorPosition()/4096;
+    return motor1.getSelectedSensorPosition();
   }
  
 

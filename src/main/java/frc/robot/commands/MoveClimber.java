@@ -12,11 +12,11 @@ import frc.robot.Robot;
 
 public class MoveClimber extends Command {
 
-  public enum Direction{
+  public enum ClimbDirection{
     UP, DOWN;
   }
-  private Direction direction;
-  public MoveClimber(Direction d) {
+  private ClimbDirection direction;
+  public MoveClimber(ClimbDirection d) {
     direction = d;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -30,8 +30,8 @@ public class MoveClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == Direction.UP){
-      Robot.climber.climb(0.5);
+    if(direction == ClimbDirection.UP){
+      Robot.climber.climb(-0.5);
     } else {
       Robot.climber.climb(0.5);
     }
@@ -41,11 +41,12 @@ public class MoveClimber extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(direction == Direction.UP){
+    /*if(direction == ClimbDirection.UP){
       return Robot.climber.reachedTop();
     } else {
       return Robot.climber.reachedBottom();
-    }
+    }*/
+    return false;
   }
 
   // Called once after isFinished returns true

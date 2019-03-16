@@ -36,6 +36,7 @@ public class Vision extends Subsystem {
     ultrasonic.setAverageBits(2);
   }
   public void setVisionMode(boolean b){
+    System.out.println("Setting Vision Mode " + b);
     table.getEntry("Vision Mode").setBoolean(b);
  
     if (b){
@@ -44,13 +45,19 @@ public class Vision extends Subsystem {
       light.set(Value.kOff);
     }
   }
+
+  public void lightOn(boolean b){
+   // light
+  }
+
   public double getOffset(TargetSpot target){
     return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 
   public boolean getVisionMode(){
+    System.out.println("Getting vision mode " + table.getEntry("Vision Mode").getBoolean(false));
     return table.getEntry("Vision Mode").getBoolean(false);
   }
-  //double something = Vision.getOffset();
+ 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public int getContourNumber(){

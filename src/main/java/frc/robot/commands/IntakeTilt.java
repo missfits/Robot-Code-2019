@@ -13,7 +13,7 @@ import frc.robot.Robot;
 
 public class IntakeTilt extends BetterCommand {
   boolean goingForward;
-  double targetPosition;
+  double targetPosition, positionOffset;
   public enum TiltPosition {
     CLIMBING, HATCH_PICKUP, BALL_PICKUP, BALL_SHOOT_POSITION
   }
@@ -21,7 +21,7 @@ public class IntakeTilt extends BetterCommand {
   public IntakeTilt(TiltPosition p) {
     switch(p){
       case CLIMBING:
-        targetPosition = 705;
+        targetPosition = 715;
         break;
       case HATCH_PICKUP:
         targetPosition = 85;
@@ -41,23 +41,25 @@ public class IntakeTilt extends BetterCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    goingForward = Robot.intake.getTiltPosition() < targetPosition;
+    positionOffset = Robot.intake.getTiltPosition() - targetPosition;
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void betterExecute() {
-    if(goingForward){
-      Robot.intake.tiltOut();
+    if(positionOffset < 0){
+      Robot.intake.tiltOut(Math.abs(positionOffset)/400);
     }else{
-      Robot.intake.tiltIn();
+      Robot.intake.tiltIn(Math.abs(positionOffset)/400);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return goingForward? Robot.intake.getTiltPosition() >= targetPosition: Robot.intake.getTiltPosition() <= targetPosition;
+    double currentPosition = Robot.intake.getTiltPosition();
+    return goingForward? (currentPosition >= targetPosition - 10 && currentPosition <= targetPosition + 10) : (currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10);
   }
 
   // Called once after isFinished returns true

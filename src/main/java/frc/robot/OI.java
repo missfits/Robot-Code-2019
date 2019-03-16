@@ -70,7 +70,7 @@ public class OI {
 		rightBumperButton.whileHeld(new RunIntakeArm(ArmDirection.DOWN));
 
 		rightStickTrigger.whileHeld(new ControlledDriveStraight());
-		rightStickThumbButton.whenPressed(new ControlledApproachTarget());
+		rightStickThumbButton.whileHeld(new ControlledApproachTarget());
 		rightStick4.whenPressed(new FlipVisionMode());
 		
 		

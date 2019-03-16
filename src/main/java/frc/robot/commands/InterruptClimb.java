@@ -7,17 +7,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.IntakeTilt.TiltPosition;
-import frc.robot.commands.RunIntakeWheels.WheelDirection;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
-public class PickUpBall extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
-  public PickUpBall() {
-    addSequential(new IntakeTilt(TiltPosition.BALL_PICKUP));
-    addSequential(new RunIntakeWheels(WheelDirection.IN));
-    addSequential(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
+public class InterruptClimb extends InstantCommand {
+  public InterruptClimb() {
+    super();
+    requires(Robot.climber);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
+
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.climber.climb(0);
+  }
+
 }

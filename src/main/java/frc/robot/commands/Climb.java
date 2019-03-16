@@ -11,35 +11,36 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.MoveClimber.ClimbDirection;
+import frc.robot.commands.RunIntakeWheels.WheelDirection;
+import frc.robot.subsystems.Elevator.Height;
 
 public class Climb extends CommandGroup {
   /**
    * Add your docs here.
    */
   public Climb() {
+    /*
+    Auto climb:
+    - raise elevator to Z1
+    - tilt intake down to climb position (and hold position)
+    - lower elevator and climber together until elevator is at Z0
+    - stop both
+    - run intake wheels in + run drive train fwd 
+    - maybe leave pulling up the climber for a manual procedure?
+    */ 
+    addSequential(new Elevate(Height.START_CLIMB));
     addSequential(new IntakeTilt(TiltPosition.CLIMBING));
+    addParallel(new KeepIntakeTilted());
+    addParallel(new MoveClimber(ClimbDirection.UP));
+    addSequential(new Elevate(Height.GROUND));
+    addSequential(new InterruptClimb());
+    addParallel(new RunIntakeWheels(WheelDirection.IN));
+    addParallel(new DriveStraight(1000));
+    /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
     addParallel(new DriveStraight(1234567890));
     addSequential(new TimedCommand(2));
     addSequential(new MoveClimber(ClimbDirection.UP));
     addSequential(new ApproachWall());
-    addSequential(new MoveClimber(ClimbDirection.DOWN));
-    
-
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    addSequential(new MoveClimber(ClimbDirection.DOWN));*/
   }
 }

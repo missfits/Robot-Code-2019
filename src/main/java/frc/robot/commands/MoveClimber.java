@@ -18,6 +18,7 @@ public class MoveClimber extends Command {
   private ClimbDirection direction;
   public MoveClimber(ClimbDirection d) {
     direction = d;
+    requires(Robot.climber);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

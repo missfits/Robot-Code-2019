@@ -17,6 +17,9 @@ public class Elevate extends Command {
   
   public Elevate(Height h) {
     switch(h){
+      case GROUND:
+        targetPosition = 0;
+        break;
       case BOTTOM_BALL:
         targetPosition = 1;
         break;
@@ -34,6 +37,9 @@ public class Elevate extends Command {
         break;
       case TOP_HATCH:
         targetPosition = 6;
+        break;
+      case START_CLIMB:
+        targetPosition = 7;
         break;
     }
     requires(Robot.elevator);

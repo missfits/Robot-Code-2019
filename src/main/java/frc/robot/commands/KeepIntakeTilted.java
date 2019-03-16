@@ -8,22 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class RunIntakeWheels extends Command {
-  public enum WheelDirection{
-    IN, OUT
-  }
-  /**
-   * Add your docs here.
-   */
-  public WheelDirection direction;
-  public RunIntakeWheels( WheelDirection d) {
-    direction = d;
+public class KeepIntakeTilted extends Command {
+  double holdPosition;
+  public KeepIntakeTilted() {
+    requires(Robot.intake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -31,33 +21,38 @@ public class RunIntakeWheels extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    holdPosition = Robot.intake.getTiltPosition();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == WheelDirection.IN){
-      Robot.intake.wheelsIn();
+    double currentPosition = Robot.intake.getTiltPosition();
+    if(currentPosition <= holdPosition - 10){
+      Robot.intake.tiltOut(0.2);
+    }else if(currentPosition >= holdPosition + 10){
+      Robot.intake.tiltIn(0.2);
     }else{
-      Robot.intake.wheelsOut();
+      Robot.elevator.elevate(0);
     }
-    
   }
+
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after timeout
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.wheelsStop();
+    Robot.intake.stopTilt();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.intake.wheelsStop();
+    end();
   }
 }

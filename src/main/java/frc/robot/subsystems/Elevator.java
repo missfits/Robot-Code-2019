@@ -26,7 +26,7 @@ public class Elevator extends Subsystem {
     motor2.setInverted(true);
   }
   public enum Height{
-    BOTTOM_BALL, BOTTOM_HATCH, MIDDLE_BALL, MIDDLE_HATCH, TOP_BALL, TOP_HATCH;
+    GROUND,BOTTOM_BALL, BOTTOM_HATCH, MIDDLE_BALL, MIDDLE_HATCH, TOP_BALL, TOP_HATCH, START_CLIMB;
   }
  
   public void elevate(double speed){
@@ -37,6 +37,10 @@ public class Elevator extends Subsystem {
   
   public double getPosition() {
     return motor1.getSelectedSensorPosition();
+  }
+  
+  public void zeroPosition(){
+    motor1.setSelectedSensorPosition(0);
   }
  
 

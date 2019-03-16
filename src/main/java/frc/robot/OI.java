@@ -15,7 +15,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.MoveClimber.ClimbDirection;
 import frc.robot.commands.RunIntakeArm.ArmDirection;
-import frc.robot.commands.RunIntakeWheels.Direction;
+import frc.robot.commands.RunIntakeWheels.WheelDirection;
 
 
 /**
@@ -64,8 +64,8 @@ public class OI {
 		backButton.whileHeld(new MoveClimber(ClimbDirection.UP));
 		startButton.whileHeld(new MoveClimber(ClimbDirection.DOWN));
 
-		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(Direction.IN));
-		xBoxRightTrigger.whileHeld(new RunIntakeWheels(Direction.OUT));
+		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));
+		xBoxRightTrigger.whileHeld(new RunIntakeWheels(WheelDirection.OUT));
 		leftBumperButton.whileHeld(new RunIntakeArm(ArmDirection.UP));
 		rightBumperButton.whileHeld(new RunIntakeArm(ArmDirection.DOWN));
 

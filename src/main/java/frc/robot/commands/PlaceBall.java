@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.RunIntakeWheels.Direction;
+import frc.robot.commands.RunIntakeWheels.WheelDirection;
 import frc.robot.subsystems.Elevator.Height;
 
 public class PlaceBall extends CommandGroup {
@@ -17,7 +17,7 @@ public class PlaceBall extends CommandGroup {
    */
   public PlaceBall(Height h) {
     addSequential(new Elevate(h));
-    addSequential(new RunIntakeWheels(Direction.OUT));
+    addSequential(new RunIntakeWheels(WheelDirection.OUT));
     addSequential(new Elevate(Height.BOTTOM_HATCH));
     // Add Commands here:
     // e.g. addSequential(new Command1());

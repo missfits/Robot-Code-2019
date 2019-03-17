@@ -55,6 +55,10 @@ public void stopTilt(){
 public void wheelsIn(){
   wheels.set(-1); 
 }
+public void wheelsIn(double speed){
+  wheels.set(-speed);
+
+}
 public void wheelsOut(){
   wheels.set(1);
 }

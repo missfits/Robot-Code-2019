@@ -7,12 +7,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class TeleopIntake extends Command {
-  public TeleopIntake() {
-    requires(Robot.intake);
+/**
+ * Add your docs here.
+ */
+public class TimedDriveStraight extends TimedCommand {
+  /**
+   * Add your docs here.
+   */
+  public TimedDriveStraight(double timeout) {
+    super(timeout);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,33 +31,19 @@ public class TeleopIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
-      if(Robot.oi.xBoxLeftStickY() < 0){
-        Robot.intake.wheelsIn(0.2);
-      }else{
-        Robot.intake.wheelsStop();
-      }
-    }else{
-      Robot.intake.stopTilt();
-      Robot.intake.wheelsStop();
-    }
+    Robot.driveTrain.driveStraight(0.5);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
+  // Called once after timeout
   @Override
   protected void end() {
+    Robot.driveTrain.driveStraight(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

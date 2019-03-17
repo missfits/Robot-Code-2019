@@ -35,7 +35,7 @@ public class Climb extends CommandGroup {
     addSequential(new Elevate(Height.GROUND));
     addSequential(new InterruptClimb());
     addParallel(new RunIntakeWheels(WheelDirection.IN));
-    addParallel(new DriveStraight(1000));
+    addParallel(new TimedDriveStraight(5));
     /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
     addParallel(new DriveStraight(1234567890));
     addSequential(new TimedCommand(2));

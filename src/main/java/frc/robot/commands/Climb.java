@@ -29,13 +29,13 @@ public class Climb extends CommandGroup {
     - maybe leave pulling up the climber for a manual procedure?
     */ 
     addSequential(new Elevate(Height.START_CLIMB));
-    addSequential(new IntakeTilt(TiltPosition.CLIMBING));
-    addParallel(new KeepIntakeTilted());
-    addParallel(new MoveClimber(ClimbDirection.UP));
+    /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
+    addParallel(new KeepIntakeTilted());*/
+    addParallel(new ClimbUp());
     addSequential(new Elevate(Height.GROUND));
     addSequential(new InterruptClimb());
-    addParallel(new RunIntakeWheels(WheelDirection.IN));
-    addParallel(new TimedDriveStraight(5));
+    //addParallel(new RunIntakeWheels(WheelDirection.IN));
+    addSequential(new TimedDriveStraight(5));
     /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
     addParallel(new DriveStraight(1234567890));
     addSequential(new TimedCommand(2));

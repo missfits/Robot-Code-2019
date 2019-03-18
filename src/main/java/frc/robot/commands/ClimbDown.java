@@ -7,18 +7,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class MoveClimber extends Command {
-
-  public enum ClimbDirection{
-    UP, DOWN;
-  }
-  private ClimbDirection direction;
-  public MoveClimber(ClimbDirection d) {
-    direction = d;
-    requires(Robot.climber);
+/**
+ * Add your docs here.
+ */
+public class ClimbDown extends TimedCommand {
+  /**
+   * Add your docs here.
+   */
+  public ClimbDown(double timeout) {
+    super(timeout);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -31,26 +31,10 @@ public class MoveClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == ClimbDirection.UP){
-      Robot.climber.climb(-1);
-    } else {
-      Robot.climber.climb(0.5);
-    }
-  }
-  
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    /*if(direction == ClimbDirection.UP){
-      return Robot.climber.reachedTop();
-    } else {
-      return Robot.climber.reachedBottom();
-    }*/
-    return false;
+    Robot.climber.climb(1);
   }
 
-  // Called once after isFinished returns true
+  // Called once after timeout
   @Override
   protected void end() {
     Robot.climber.climb(0);

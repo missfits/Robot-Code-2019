@@ -59,7 +59,8 @@ public class OI {
 		aButton.whileHeld(new IntakeTilt(TiltPosition.BALL_PICKUP));
 		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
 		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
-		xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
+		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
+		xButton.whileHeld(new Climb());
 		//startButton.whileHeld(new Climb());
 		backButton.whileHeld(new MoveClimber(ClimbDirection.UP));
 		startButton.whileHeld(new MoveClimber(ClimbDirection.DOWN));

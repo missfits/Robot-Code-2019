@@ -10,14 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveClimber extends Command {
-
-  public enum ClimbDirection{
-    UP, DOWN;
-  }
-  private ClimbDirection direction;
-  public MoveClimber(ClimbDirection d) {
-    direction = d;
+public class ClimbUp extends Command {
+  public ClimbUp() {
     requires(Robot.climber);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -31,23 +25,13 @@ public class MoveClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(direction == ClimbDirection.UP){
-      Robot.climber.climb(-1);
-    } else {
-      Robot.climber.climb(0.5);
-    }
+    Robot.climber.climb(-1.0);
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    /*if(direction == ClimbDirection.UP){
-      return Robot.climber.reachedTop();
-    } else {
-      return Robot.climber.reachedBottom();
-    }*/
-    return false;
+    return Robot.climber.reachedTop();
   }
 
   // Called once after isFinished returns true

@@ -24,7 +24,20 @@ public class TeleopElevator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.elevate(Math.abs(Robot.oi.xBoxRightStickY()) > 0.2 ? Robot.oi.xBoxRightStickY() : 0);
+    double speed = Robot.oi.xBoxRightStickY();
+    if(Math.abs(speed) > 0.2){
+      if(speed < 0 && Robot.elevator.getPosition() < 14050){
+        //up
+        Robot.elevator.elevate(speed);
+      }else if(speed > 0/* && Robot.elevator.getPosition() > -1085*/){
+        Robot.elevator.elevate(speed);
+      }else{
+        Robot.elevator.elevate(0);
+      }
+    }else{
+      Robot.elevator.elevate(0);
+    }
+    //Robot.elevator.elevate(Math.abs(Robot.oi.xBoxRightStickY()) > 0.2 ? Robot.oi.xBoxRightStickY() : 0);
     //SmartDashboard.putNumber("Elevator Position", Robot.elevator.getPosition());
   }
 

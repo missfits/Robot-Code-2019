@@ -26,8 +26,10 @@ public class TeleopIntake extends Command {
   @Override
   protected void execute() {
     if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
-      if(Robot.oi.xBoxLeftStickY() < 0){
+      if(!Robot.intake.tiltLimitPressed() || Robot.oi.xBoxLeftStickY() > 0){
+        Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
+      }
+      if(Robot.oi.xBoxLeftStickY() < 0 && !Robot.intake.tiltLimitPressed()){
         Robot.intake.wheelsIn(0.2);
       }else{
         Robot.intake.wheelsStop();

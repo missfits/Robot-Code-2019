@@ -16,6 +16,7 @@ import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.MoveClimber.ClimbDirection;
 import frc.robot.commands.RunIntakeArm.ArmDirection;
 import frc.robot.commands.RunIntakeWheels.WheelDirection;
+import frc.robot.subsystems.Elevator.Height;
 
 
 /**
@@ -56,9 +57,13 @@ public class OI {
 		//aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
 		//bButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.MIDDLE_BALL): new PlaceHatch(Height.MIDDLE_HATCH));
 		//yButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.TOP_BALL): new PlaceHatch(Height.TOP_HATCH));
-		aButton.whileHeld(new IntakeTilt(TiltPosition.BALL_PICKUP));
+		/*aButton.whileHeld(new IntakeTilt(TiltPosition.BALL_PICKUP));
 		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
-		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
+		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));*/
+		aButton.whileHeld(new Elevate(Height.BALL_PICKUP));
+		xButton.whileHeld(new Elevate(Height.HOLDING_BALL));
+		yButton.whileHeld(new Elevate(Height.CARGO_SHIP));
+		bButton.whileHeld(new Elevate(Height.BOTTOM_ROCKET));
 		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
 		xButton.whileHeld(new Climb());
 		//startButton.whileHeld(new Climb());

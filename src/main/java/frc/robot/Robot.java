@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    elevator.zeroPosition();
     m_chooser.setDefaultOption("Default Auto", new TeleopDriveTrain());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -90,7 +91,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    elevator.zeroPosition();
+    //elevator.zeroPosition();
     m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -116,7 +117,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    elevator.zeroPosition();
+    //elevator.zeroPosition();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -132,6 +133,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putBoolean("Intake Tilt Limit", intake.tiltLimitPressed());
     SmartDashboard.putNumber("Elevator Height", elevator.getPosition());  
     SmartDashboard.putBoolean("Climber Limit Pressed",climber.reachedTop());
     //climber.climb(-1*Robot.oi.xBoxRightStickY());

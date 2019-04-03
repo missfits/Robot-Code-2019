@@ -8,38 +8,39 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.Height;
 
 public class Elevate extends Command {
   boolean goingUp;
   double targetPosition;
-  
+  /*
+  1231 -  bottom rocket
+  -10985 - ground
+  7621 - cargo ship
+  - middle rocket
+
+   */
   public Elevate(Height h) {
     switch(h){
       case GROUND:
+        targetPosition = -4458;
+        break;
+      case CARGO_SHIP:
+        targetPosition = 7621;
+        break;
+      case BOTTOM_ROCKET:
+        targetPosition = 1231;
+        break;
+      case MIDDLE_ROCKET:
+        targetPosition = 15737;
+        break;
+      case HOLDING_BALL:
         targetPosition = 0;
         break;
-      case BOTTOM_BALL:
-        targetPosition = 1;
-        break;
-      case BOTTOM_HATCH:
-        targetPosition = 2;
-        break;
-      case MIDDLE_BALL:
-        targetPosition = 3;
-        break;
-      case MIDDLE_HATCH:
-        targetPosition = 4;
-        break;
-      case TOP_BALL:
-        targetPosition = 5;
-        break;
-      case TOP_HATCH:
-        targetPosition = 6;
-        break;
-      case START_CLIMB:
-        targetPosition = 7;
+      case BALL_PICKUP:
+        targetPosition = -1473;
         break;
     }
     requires(Robot.elevator);
@@ -56,18 +57,28 @@ public class Elevate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.elevate(goingUp? 0.5 : -0.5);
+    SmartDashboard.putBoolean("Elevating", true);
+    double speed =  Math.abs(Robot.elevator.getPosition() - targetPosition)/1000;
+    SmartDashboard.putNumber("Elevator Speed", speed);
+    if (speed > 0.8){
+      speed = 0.8;
+    }else if(speed < 0.1){
+      speed = 0.1;
+    }
+    Robot.elevator.elevate(goingUp? -speed : speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return goingUp? Robot.elevator.getPosition() >= targetPosition: Robot.elevator.getPosition() <= targetPosition;
+    double currentPosition = Robot.elevator.getPosition();
+    return currentPosition >= targetPosition - 50 && currentPosition <= targetPosition + 50;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    SmartDashboard.putBoolean("Elevating", false);
    Robot.elevator.elevate(0);
   }
 

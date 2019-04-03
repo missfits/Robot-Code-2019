@@ -26,10 +26,14 @@ public class Intake extends Subsystem {
   final VictorSP wheels = new VictorSP(RobotMap.intakeWheels);
   final VictorSP arm = new VictorSP(RobotMap.intakeArm);
   final AnalogInput harry = new AnalogInput(1);
-  final DigitalInput armLimit = new DigitalInput(0);
+  //final DigitalInput armLimit = new DigitalInput(0);
+  final DigitalInput tiltLimit = new DigitalInput(0);
 
-public boolean armIsDown(){
+/*public boolean armIsDown(){
   return armLimit.get();
+}*/
+public boolean tiltLimitPressed(){
+  return tiltLimit.get();
 }
 public void raiseArm(){
   arm.set(1);

@@ -59,7 +59,7 @@ public class IntakeTilt extends BetterCommand {
   @Override
   protected boolean isFinished() {
     double currentPosition = Robot.intake.getTiltPosition();
-    return goingForward? (currentPosition >= targetPosition - 10 && currentPosition <= targetPosition + 10) : (currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10);
+    return currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10;
   }
 
   // Called once after isFinished returns true

@@ -24,13 +24,13 @@ public class IntakeTilt extends BetterCommand {
         targetPosition = 715;
         break;
       case HATCH_PICKUP:
-        targetPosition = 85;
+        targetPosition = 90;
         break;
       case BALL_PICKUP:
-        targetPosition = 420;
+        targetPosition = 488;
         break;
       case BALL_SHOOT_POSITION:
-        targetPosition = 300;
+        targetPosition = 297;
         break;
     }
 
@@ -59,7 +59,7 @@ public class IntakeTilt extends BetterCommand {
   @Override
   protected boolean isFinished() {
     double currentPosition = Robot.cargoIntake.getTiltPosition();
-    return goingForward? (currentPosition >= targetPosition - 10 && currentPosition <= targetPosition + 10) : (currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10);
+    return currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10;
   }
 
   // Called once after isFinished returns true

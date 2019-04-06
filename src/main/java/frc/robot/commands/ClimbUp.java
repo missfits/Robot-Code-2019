@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopIntake extends Command {
-  public TeleopIntake() {
-    requires(Robot.cargoIntake);
+public class ClimbUp extends Command {
+  public ClimbUp() {
+    requires(Robot.climber);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,35 +25,25 @@ public class TeleopIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      if(!Robot.intake.tiltLimitPressed() || Robot.oi.xBoxLeftStickY() > 0){
-        Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
-      }
-      if(Robot.oi.xBoxLeftStickY() < 0 && !Robot.intake.tiltLimitPressed()){
-        Robot.intake.wheelsIn(0.2);
-      }else{
-        Robot.intake.wheelsStop();
-      }
-    }else{
-      Robot.intake.stopTilt();
-      Robot.intake.wheelsStop();
-    }
+    Robot.climber.climb(-1.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.climber.reachedTop();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.climber.climb(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

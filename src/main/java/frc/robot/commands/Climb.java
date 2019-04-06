@@ -28,14 +28,14 @@ public class Climb extends CommandGroup {
     - run intake wheels in + run drive train fwd 
     - maybe leave pulling up the climber for a manual procedure?
     */ 
-    addSequential(new Elevate(Height.START_CLIMB));
-    addSequential(new IntakeTilt(TiltPosition.CLIMBING));
-    addParallel(new KeepIntakeTilted());
-    addParallel(new MoveClimber(ClimbDirection.UP));
+    //addSequential(new Elevate(Height.START_CLIMB));
+    /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
+    addParallel(new KeepIntakeTilted());*/
+    addParallel(new ClimbUp());
     addSequential(new Elevate(Height.GROUND));
     addSequential(new InterruptClimb());
-    addParallel(new RunIntakeWheels(WheelDirection.IN));
-    addParallel(new DriveStraight(1000));
+    //addParallel(new RunIntakeWheels(WheelDirection.IN));
+    addSequential(new TimedDriveStraight(5));
     /*addSequential(new IntakeTilt(TiltPosition.CLIMBING));
     addParallel(new DriveStraight(1234567890));
     addSequential(new TimedCommand(2));

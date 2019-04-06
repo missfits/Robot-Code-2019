@@ -32,7 +32,7 @@ public class MoveClimber extends Command {
   @Override
   protected void execute() {
     if(direction == ClimbDirection.UP){
-      Robot.climber.climb(-0.5);
+      Robot.climber.climb(-1);
     } else {
       Robot.climber.climb(0.5);
     }

@@ -46,10 +46,6 @@ public class Vision extends Subsystem {
     }
   }
 
-  public void lightOn(boolean b){
-   // light
-  }
-
   public double getOffset(TargetSpot target){
     return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 

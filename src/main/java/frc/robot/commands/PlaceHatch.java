@@ -22,6 +22,6 @@ public class PlaceHatch extends CommandGroup {
     addSequential(new TimedCommand(0.5));
     addSequential(new DriveStraight(-5));
     addSequential(new RaiseIntakeArm());
-    addSequential(new Elevate(Height.BOTTOM_HATCH));
+   // addSequential(new Elevate(Height.BOTTOM_HATCH));
   }
 }

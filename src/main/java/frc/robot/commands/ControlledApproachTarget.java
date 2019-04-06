@@ -30,7 +30,7 @@ public class ControlledApproachTarget extends Command {
   protected void execute() {
     double offset = Robot.vision.getOffset(TargetSpot.CENTER);
     double baseSpeed = (Robot.oi.leftStickY() + Robot.oi.rightStickY())/2;
-    double speedVariation = baseSpeed  *(1+ 4*Math.abs(offset));
+    double speedVariation = baseSpeed  *(1+ 6*Math.abs(offset));
     if(offset < -0.02){
       //System.out.println("going right");
       Robot.driveTrain.tankDrive(speedVariation, baseSpeed);

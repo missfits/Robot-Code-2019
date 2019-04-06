@@ -7,45 +7,42 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class RaiseIntakeArm extends TimedCommand {
-  /**
+
+public class MoveWings extends InstantCommand {
+ 
+/**
    * Add your docs here.
    */
-  public RaiseIntakeArm() {
-    super(2);
-    requires(Robot.cargoIntake);
+  Value currentPosition;
+  public MoveWings() {
+    super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() {
-
+    currentPosition = Robot.hatchIntake.getWingsPosition();
+    switch(currentPosition){
+      case kForward:
+        Robot.hatchIntake.releaseHatch();
+        break;
+      case kReverse:
+        Robot.hatchIntake.grabHatch();
+        break;
+      default:
+        Robot.hatchIntake.grabHatch();
+        break;
+    }
   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    Robot.cargoIntake.raiseArm();
-  }
-
-  // Called once after timeout
-  @Override
-  protected void end() {
-    Robot.cargoIntake.stopArm();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }

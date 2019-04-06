@@ -17,7 +17,8 @@ import frc.robot.commands.TeleopDriveTrain;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.HatchIntake;
+import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
 
 /**
@@ -32,8 +33,9 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Vision vision = new Vision();
   public static Elevator elevator = new Elevator();
-  public static Intake intake = new Intake();
+  public static CargoIntake cargoIntake = new CargoIntake();
   public static Climber climber = new Climber();
+  public static HatchIntake hatchIntake = new HatchIntake();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -136,7 +138,7 @@ public class Robot extends TimedRobot {
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
    // System.out.println("Distance(in)" + vision.getDistance());
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
-    SmartDashboard.putNumber("Intake Tilt",intake.getTiltPosition());
+    SmartDashboard.putNumber("Intake Tilt",cargoIntake.getTiltPosition());
     //System.out.println(Robot.intake.getTiltPosition());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
     //System.out.println("Offset: " + vision.getOffset());

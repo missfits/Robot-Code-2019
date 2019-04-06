@@ -21,7 +21,7 @@ import frc.robot.commands.TeleopIntake;
 /**
  * Add your docs here.
  */
-public class Intake extends Subsystem {
+public class CargoIntake extends Subsystem {
   final VictorSP tilt = new VictorSP(RobotMap.intakeTilt);
   final VictorSP wheels = new VictorSP(RobotMap.intakeWheels);
   final VictorSP arm = new VictorSP(RobotMap.intakeArm);

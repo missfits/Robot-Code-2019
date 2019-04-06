@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class LowerIntakeArm extends Command {
   public LowerIntakeArm() {
-    requires(Robot.intake);
+    requires(Robot.cargoIntake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,19 +25,19 @@ public class LowerIntakeArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intake.lowerArm();
+    Robot.cargoIntake.lowerArm();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.intake.armIsDown();
+    return Robot.cargoIntake.armIsDown();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopArm();
+    Robot.cargoIntake.stopArm();
   }
 
   // Called when another command which requires one or more of the same

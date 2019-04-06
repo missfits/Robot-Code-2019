@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class TeleopIntake extends Command {
   public TeleopIntake() {
-    requires(Robot.intake);
+    requires(Robot.cargoIntake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -26,9 +26,9 @@ public class TeleopIntake extends Command {
   @Override
   protected void execute() {
     if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
+      Robot.cargoIntake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
     }else{
-      Robot.intake.stopTilt();
+      Robot.cargoIntake.stopTilt();
     }
   }
 

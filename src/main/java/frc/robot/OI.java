@@ -61,8 +61,8 @@ public class OI {
 		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));
 		xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
 		//startButton.whileHeld(new Climb());
-		backButton.whileHeld(new MoveClimber(ClimbDirection.UP));
-		startButton.whileHeld(new MoveClimber(ClimbDirection.DOWN));
+		backButton.whenPressed(new MoveWings());
+		startButton.whileHeld(new MoveHatchArm());
 
 		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));
 		xBoxRightTrigger.whileHeld(new RunIntakeWheels(WheelDirection.OUT));

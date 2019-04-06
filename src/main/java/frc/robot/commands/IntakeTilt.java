@@ -41,7 +41,7 @@ public class IntakeTilt extends BetterCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    positionOffset = Robot.intake.getTiltPosition() - targetPosition;
+    positionOffset = Robot.cargoIntake.getTiltPosition() - targetPosition;
     
   }
 
@@ -49,23 +49,23 @@ public class IntakeTilt extends BetterCommand {
   @Override
   protected void betterExecute() {
     if(positionOffset < 0){
-      Robot.intake.tiltOut(Math.abs(positionOffset)/400);
+      Robot.cargoIntake.tiltOut(Math.abs(positionOffset)/400);
     }else{
-      Robot.intake.tiltIn(Math.abs(positionOffset)/400);
+      Robot.cargoIntake.tiltIn(Math.abs(positionOffset)/400);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    double currentPosition = Robot.intake.getTiltPosition();
+    double currentPosition = Robot.cargoIntake.getTiltPosition();
     return goingForward? (currentPosition >= targetPosition - 10 && currentPosition <= targetPosition + 10) : (currentPosition <= targetPosition + 10 && currentPosition >= targetPosition - 10);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopTilt();
+    Robot.cargoIntake.stopTilt();
   }
 
   // Called when another command which requires one or more of the same

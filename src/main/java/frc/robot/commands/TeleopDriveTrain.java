@@ -27,7 +27,8 @@ public class TeleopDriveTrain extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.tankDrive(Robot.oi.leftStickY(), Robot.oi.rightStickY());
+    int directionMultiplier = Robot.oi.reverseMode() ? -1 : 1;
+    Robot.driveTrain.tankDrive(directionMultiplier * Robot.oi.leftStickY(), directionMultiplier * Robot.oi.rightStickY());
   }
 
   // Make this return true when this Command no longer needs to run execute()

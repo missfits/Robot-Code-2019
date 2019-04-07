@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new TeleopDriveTrain());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    hatchIntake.setUpCompressor();
   }
 
   /**
@@ -135,13 +136,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putBoolean("Intake Tilt Limit", intake.tiltLimitPressed());
+    SmartDashboard.putBoolean("Intake Tilt Limit", cargoIntake.tiltLimitPressed());
     SmartDashboard.putNumber("Elevator Height", elevator.getPosition());  
     SmartDashboard.putBoolean("Climber Limit Pressed",climber.reachedTop());
     //climber.climb(-1*Robot.oi.xBoxRightStickY());
    // System.out.println("Distance(in)" + vision.getDistance());
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Intake Tilt",cargoIntake.getTiltPosition());
+    SmartDashboard.putString("Wings Solenoid Position", hatchIntake.getPositionString(true));
+    SmartDashboard.putString("Arm Solenoid Position", hatchIntake.getPositionString(true));
+
     //System.out.println(Robot.intake.getTiltPosition());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
     //System.out.println("Offset: " + vision.getOffset());

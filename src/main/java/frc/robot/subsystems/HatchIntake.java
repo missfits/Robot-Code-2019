@@ -44,6 +44,26 @@ public class HatchIntake extends Subsystem {
     return armSolenoid.get();
   }
 
+  public void setUpCompressor(){
+    compressor.setClosedLoopControl(true);
+  }
+
+  public String getPositionString(boolean checkingWings){
+    //this code sucks ik
+    //inner jacob is writhing in pain
+    Value val = checkingWings ? getWingsPosition() : getArmsPosition();
+    switch(val){
+      case kForward:
+        return "forward";
+      case kReverse:
+        return "reverse";
+      case kOff:
+        return "off";
+      default:
+        return "???";
+    }
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

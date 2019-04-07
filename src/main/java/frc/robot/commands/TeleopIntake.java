@@ -26,17 +26,17 @@ public class TeleopIntake extends Command {
   @Override
   protected void execute() {
     if(Math.abs(Robot.oi.xBoxLeftStickY()) > 0.3){
-      if(!Robot.intake.tiltLimitPressed() || Robot.oi.xBoxLeftStickY() > 0){
-        Robot.intake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
+      if(!Robot.cargoIntake.tiltLimitPressed() || Robot.oi.xBoxLeftStickY() > 0){
+        Robot.cargoIntake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
       }
-      if(Robot.oi.xBoxLeftStickY() < 0 && !Robot.intake.tiltLimitPressed()){
-        Robot.intake.wheelsIn(0.2);
+      if(Robot.oi.xBoxLeftStickY() < 0 && !Robot.cargoIntake.tiltLimitPressed()){
+        Robot.cargoIntake.wheelsIn(0.2);
       }else{
-        Robot.intake.wheelsStop();
+        Robot.cargoIntake.wheelsStop();
       }
     }else{
-      Robot.intake.stopTilt();
-      Robot.intake.wheelsStop();
+      Robot.cargoIntake.stopTilt();
+      Robot.cargoIntake.wheelsStop();
     }
   }
 

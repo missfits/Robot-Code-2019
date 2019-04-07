@@ -42,6 +42,7 @@ public class OI {
 	public Button rightStickTrigger = new JoystickButton(rightStick,1);
 	public Button rightStickThumbButton = new JoystickButton(rightStick,2);
 	public Button rightStick4 = new JoystickButton(rightStick,4);
+	public Button rightStick5 = new JoystickButton(rightStick,5);
 
 	public Button leftStick12 = new JoystickButton(leftStick, 12);
 
@@ -52,6 +53,7 @@ public class OI {
 	public double xBoxLeftStickX() {return xBox.getRawAxis(0);}
 	public double xBoxRightStickY() {return xBox.getRawAxis(5);}
 	public double xBoxRightStickX() {return xBox.getRawAxis(4);}
+	public boolean reverseMode(){return rightStick5.get();}
   
   public OI(){
 		//aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));

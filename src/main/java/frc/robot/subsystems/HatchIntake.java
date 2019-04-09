@@ -17,15 +17,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class HatchIntake extends Subsystem {
   final Compressor compressor = new Compressor(0);
-	final DoubleSolenoid wingsSolenoid = new DoubleSolenoid(2, 3);
-	final DoubleSolenoid armSolenoid = new DoubleSolenoid(0, 1);
+	final DoubleSolenoid wingsSolenoid = new DoubleSolenoid(1, 2);
+	final DoubleSolenoid armSolenoid = new DoubleSolenoid(0, 3);
 
   public void grabHatch(){
-    wingsSolenoid.set(DoubleSolenoid.Value.kForward);
+    wingsSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void releaseHatch(){
-    wingsSolenoid.set(DoubleSolenoid.Value.kReverse);
+    wingsSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void armSolenoidIn(){
@@ -33,14 +33,14 @@ public class HatchIntake extends Subsystem {
   }
 
   public void armSolenoidOut(){
-    armSolenoid.set(DoubleSolenoid.Value.kForward);
+    armSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public Value getWingsPosition(){
     return wingsSolenoid.get();
   }
 
-  public Value getArmsPosition(){
+  public Value getArmPosition(){
     return armSolenoid.get();
   }
 
@@ -51,7 +51,7 @@ public class HatchIntake extends Subsystem {
   public String getPositionString(boolean checkingWings){
     //this code sucks ik
     //inner jacob is writhing in pain
-    Value val = checkingWings ? getWingsPosition() : getArmsPosition();
+    Value val = checkingWings ? getWingsPosition() : getArmPosition();
     switch(val){
       case kForward:
         return "forward";

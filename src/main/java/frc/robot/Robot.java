@@ -136,6 +136,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    vision.useBackCam(driveTrain.getReverseMode());
     SmartDashboard.putBoolean("Intake Tilt Limit", cargoIntake.tiltLimitPressed());
     SmartDashboard.putNumber("Elevator Height", elevator.getPosition());  
     SmartDashboard.putBoolean("Climber Limit Pressed",climber.reachedTop());
@@ -144,7 +145,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Gyro Angle", driveTrain.getAngle());
     SmartDashboard.putNumber("Intake Tilt",cargoIntake.getTiltPosition());
     SmartDashboard.putString("Wings Solenoid Position", hatchIntake.getPositionString(true));
-    SmartDashboard.putString("Arm Solenoid Position", hatchIntake.getPositionString(true));
+    SmartDashboard.putString("Arm Solenoid Position", hatchIntake.getPositionString(false));
+    SmartDashboard.putBoolean("Start Button",oi.startButton.get());
 
     //System.out.println(Robot.intake.getTiltPosition());
     //double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);

@@ -7,19 +7,17 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class MoveHatchArm extends InstantCommand {
+public class FlipReverseMode extends InstantCommand {
   /**
    * Add your docs here.
    */
-  Value currentPosition;
-  public MoveHatchArm() {
+  public FlipReverseMode() {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -28,18 +26,7 @@ public class MoveHatchArm extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    currentPosition = Robot.hatchIntake.getArmPosition();
-    switch(currentPosition){
-      case kForward:
-        Robot.hatchIntake.armSolenoidOut();
-        break;
-      case kReverse:
-        Robot.hatchIntake.armSolenoidIn();
-        break;
-      default:
-        Robot.hatchIntake.armSolenoidOut();
-        break;
-    }
+    Robot.driveTrain.setReverseMode(!Robot.driveTrain.getReverseMode());
   }
 
 }

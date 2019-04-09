@@ -31,6 +31,7 @@ public class DriveTrain extends Subsystem {
   final TalonSRX centerLeft = new TalonSRX(RobotMap.centerLeft);
   final TalonSRX centerRight = new TalonSRX(RobotMap.centerRight);
   final AHRS navX = new AHRS(SPI.Port.kMXP);
+  private boolean reverseMode = false;
 
   public DriveTrain(){
     //inversion might not be working? figure that out later
@@ -49,6 +50,14 @@ public class DriveTrain extends Subsystem {
     rearRight.setInverted(InvertType.OpposeMaster);
     centerRight.setInverted(InvertType.OpposeMaster);*/
 
+  }
+
+  public boolean getReverseMode(){
+    return reverseMode;
+  }
+
+  public void setReverseMode(boolean b){
+    reverseMode = b;
   }
   
   public void driveStraight(double speed) {

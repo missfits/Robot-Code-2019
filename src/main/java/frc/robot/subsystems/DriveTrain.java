@@ -61,23 +61,30 @@ public class DriveTrain extends Subsystem {
   }
   
   public void driveStraight(double speed) {
-		frontLeft.set(ControlMode.PercentOutput, speed);
-		rearLeft.set(ControlMode.PercentOutput, speed);
-		frontRight.set(ControlMode.PercentOutput, speed);
-    rearRight.set(ControlMode.PercentOutput, speed);
-    centerRight.set(ControlMode.PercentOutput, speed);
-    centerLeft.set(ControlMode.PercentOutput, speed);
+    int directionMultiplier = reverseMode ? -1 : 1;
+		frontLeft.set(ControlMode.PercentOutput,directionMultiplier * speed);
+		rearLeft.set(ControlMode.PercentOutput, directionMultiplier * speed);
+		frontRight.set(ControlMode.PercentOutput, directionMultiplier * speed);
+    rearRight.set(ControlMode.PercentOutput, directionMultiplier * speed);
+    centerRight.set(ControlMode.PercentOutput, directionMultiplier * speed);
+    centerLeft.set(ControlMode.PercentOutput, directionMultiplier * speed);
   }
   
   public void tankDrive(double lSpeed, double rSpeed){
-    frontLeft.set(ControlMode.PercentOutput, lSpeed);
-    rearLeft.set(ControlMode.PercentOutput, lSpeed);
-    centerLeft.set(ControlMode.PercentOutput, lSpeed);
-		frontRight.set(ControlMode.PercentOutput, rSpeed);
-    rearRight.set(ControlMode.PercentOutput, rSpeed);
-    centerRight.set(ControlMode.PercentOutput, rSpeed);
-    SmartDashboard.putNumber("L: ", lSpeed);
-    SmartDashboard.putNumber("R: ",  rSpeed);
+    double actualLSpeed = lSpeed;
+    double actualRSpeed = rSpeed;
+    if(reverseMode){
+      actualLSpeed = -rSpeed;
+      actualRSpeed = -lSpeed;
+    }
+    frontLeft.set(ControlMode.PercentOutput, actualLSpeed);
+    rearLeft.set(ControlMode.PercentOutput, actualLSpeed);
+    centerLeft.set(ControlMode.PercentOutput, actualLSpeed);
+		frontRight.set(ControlMode.PercentOutput, actualRSpeed);
+    rearRight.set(ControlMode.PercentOutput, actualRSpeed);
+    centerRight.set(ControlMode.PercentOutput, actualRSpeed);
+    SmartDashboard.putNumber("L: ", actualLSpeed);
+    SmartDashboard.putNumber("R: ",  actualRSpeed);
   }
 
   public double getLeftPosition() {

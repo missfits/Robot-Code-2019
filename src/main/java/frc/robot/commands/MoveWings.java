@@ -34,13 +34,13 @@ public class MoveWings extends InstantCommand {
     currentPosition = Robot.hatchIntake.getWingsPosition();
     switch(currentPosition){
       case kForward:
-        Robot.hatchIntake.releaseHatch();
+        Robot.hatchIntake.wingsClosed();
         break;
       case kReverse:
-        Robot.hatchIntake.grabHatch();
+        Robot.hatchIntake.wingsOpen();
         break;
       default:
-        Robot.hatchIntake.grabHatch();
+        Robot.hatchIntake.wingsClosed();
         break;
     }
   }

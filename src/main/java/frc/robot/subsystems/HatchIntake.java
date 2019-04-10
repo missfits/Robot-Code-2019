@@ -20,11 +20,11 @@ public class HatchIntake extends Subsystem {
 	final DoubleSolenoid wingsSolenoid = new DoubleSolenoid(1, 2);
 	final DoubleSolenoid armSolenoid = new DoubleSolenoid(0, 3);
 
-  public void grabHatch(){
+  public void wingsClosed(){
     wingsSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void releaseHatch(){
+  public void wingsOpen(){
     wingsSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 

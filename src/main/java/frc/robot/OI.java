@@ -64,7 +64,7 @@ public class OI {
 		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
 		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));*/
 		aButton.whileHeld(new Elevate(Height.BALL_PICKUP));
-		xButton.whileHeld(new Elevate(Height.HOLDING_BALL));
+		//xButton.whileHeld(new Elevate(Height.HOLDING_BALL));
 		yButton.whileHeld(new Elevate(Height.CARGO_SHIP));
 		bButton.whileHeld(new Elevate(Height.BOTTOM_ROCKET));
 		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
@@ -72,6 +72,7 @@ public class OI {
 		//startButton.whileHeld(new Climb());
 		backButton.whenPressed(new MoveWings());
 		startButton.whenPressed(new MoveHatchArm());
+		xButton.whileHeld(new RunHatchIntake());
 
 		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));
 		xBoxRightTrigger.whileHeld(new RunIntakeWheels(WheelDirection.OUT));

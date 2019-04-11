@@ -68,7 +68,7 @@ public class OI {
 		yButton.whileHeld(new Elevate(Height.CARGO_SHIP));
 		bButton.whileHeld(new Elevate(Height.BOTTOM_ROCKET));
 		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
-		xButton.whileHeld(new Climb());
+		//xButton.whileHeld(new Climb());
 		//startButton.whileHeld(new Climb());
 		backButton.whenPressed(new MoveWings());
 		startButton.whenPressed(new MoveHatchArm());

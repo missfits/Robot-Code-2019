@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     elevator.zeroPosition();
     m_chooser.setDefaultOption("Default Auto", new TeleopDriveTrain());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    //SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    System.out.println(vision.getVisionMode());
     //System.out.println(oi.xBoxLeftStickY());
   }
 

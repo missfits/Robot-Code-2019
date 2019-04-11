@@ -16,12 +16,12 @@ package frc.robot;
 public class RobotMap {
  
   //2019 bot
-  public static int frontLeft = 2;
+  /*public static int frontLeft = 2;
   public static int rearLeft = 5;
   public static int frontRight = 6;
   public static int rearRight = 4;
   public static int centerLeft = 1;
-  public static int centerRight = 3;
+  public static int centerRight = 3;*/
 
   public static int climber1 = 0;
   public static int climber2 = 1;
@@ -32,13 +32,14 @@ public class RobotMap {
   public static int intakeArm = 1;
   public static int climberArms = 3;
   
+
   //2018 bot
-  /*public static int frontLeft = 1;
+  public static int frontLeft = 1;
   public static int rearLeft = 5;
   public static int frontRight = 3;
   public static int rearRight = 2;
   public static int centerLeft = 4;
-  public static int centerRight = 0;*/
+  public static int centerRight = 0;
   
 
   // If you are using multiple modules, make sure to define both the port

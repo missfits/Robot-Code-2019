@@ -37,9 +37,9 @@ public class RunIntakeWheels extends Command {
   @Override
   protected void execute() {
     if(direction == WheelDirection.IN){
-      Robot.intake.wheelsIn();
+      Robot.cargoIntake.wheelsIn();
     }else{
-      Robot.intake.wheelsOut();
+      Robot.cargoIntake.wheelsOut();
     }
     
   }
@@ -51,13 +51,13 @@ public class RunIntakeWheels extends Command {
   // Called once after timeout
   @Override
   protected void end() {
-    Robot.intake.wheelsStop();
+    Robot.cargoIntake.wheelsStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.intake.wheelsStop();
+    Robot.cargoIntake.wheelsStop();
   }
 }

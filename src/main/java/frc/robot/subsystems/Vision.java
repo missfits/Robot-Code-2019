@@ -46,6 +46,14 @@ public class Vision extends Subsystem {
     }
   }
 
+  public void useBackCam(boolean b){
+    table.getEntry("Reverse Drive").setBoolean(b);
+  }
+
+  public boolean getRobotFront(){
+    return table.getEntry("Reverse Drive").getBoolean(false);
+  }
+
   public double getOffset(TargetSpot target){
     return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 

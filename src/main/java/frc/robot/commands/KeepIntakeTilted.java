@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class KeepIntakeTilted extends Command {
   double holdPosition;
   public KeepIntakeTilted() {
-    requires(Robot.intake);
+    requires(Robot.cargoIntake);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -21,17 +21,17 @@ public class KeepIntakeTilted extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    holdPosition = Robot.intake.getTiltPosition();
+    holdPosition = Robot.cargoIntake.getTiltPosition();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double currentPosition = Robot.intake.getTiltPosition();
+    double currentPosition = Robot.cargoIntake.getTiltPosition();
     if(currentPosition <= holdPosition - 10){
-      Robot.intake.tiltOut(0.2);
+      Robot.cargoIntake.tiltOut(0.2);
     }else if(currentPosition >= holdPosition + 10){
-      Robot.intake.tiltIn(0.2);
+      Robot.cargoIntake.tiltIn(0.2);
     }else{
       Robot.elevator.elevate(0);
     }
@@ -46,7 +46,7 @@ public class KeepIntakeTilted extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopTilt();
+    Robot.cargoIntake.stopTilt();
   }
 
   // Called when another command which requires one or more of the same

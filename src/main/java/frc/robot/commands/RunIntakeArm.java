@@ -34,10 +34,10 @@ public class RunIntakeArm extends Command {
   protected void execute() {
     switch(armDirection){
       case UP:
-        Robot.intake.raiseArm();
+        Robot.cargoIntake.raiseArm();
         break;
       case DOWN:
-      Robot.intake.lowerArm();
+      Robot.cargoIntake.lowerArm();
         break;
     }
   }
@@ -51,7 +51,7 @@ public class RunIntakeArm extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.stopArm();
+    Robot.cargoIntake.stopArm();
   }
 
   // Called when another command which requires one or more of the same

@@ -42,7 +42,9 @@ public class OI {
 	public Button rightStickTrigger = new JoystickButton(rightStick,1);
 	public Button rightStickThumbButton = new JoystickButton(rightStick,2);
 	public Button rightStick4 = new JoystickButton(rightStick,4);
+	public Button rightStick5 = new JoystickButton(rightStick,5);
 
+	public Button leftStickTrigger = new JoystickButton(leftStick, 1);
 	public Button leftStick12 = new JoystickButton(leftStick, 12);
 
   public double leftStickY(){return -leftStick.getRawAxis(1);}
@@ -52,6 +54,7 @@ public class OI {
 	public double xBoxLeftStickX() {return xBox.getRawAxis(0);}
 	public double xBoxRightStickY() {return xBox.getRawAxis(5);}
 	public double xBoxRightStickX() {return xBox.getRawAxis(4);}
+	//public boolean reverseMode(){return leftStickTrigger.get();}
   
   public OI(){
 		//aButton.whenPressed(leftTrigger.get()? new PlaceBall(Height.BOTTOM_BALL): new PlaceHatch(Height.BOTTOM_HATCH));
@@ -61,14 +64,15 @@ public class OI {
 		yButton.whileHeld(new IntakeTilt(TiltPosition.HATCH_PICKUP));
 		bButton.whileHeld(new IntakeTilt(TiltPosition.BALL_SHOOT_POSITION));*/
 		aButton.whileHeld(new Elevate(Height.BALL_PICKUP));
-		xButton.whileHeld(new Elevate(Height.HOLDING_BALL));
+		//xButton.whileHeld(new Elevate(Height.HOLDING_BALL));
 		yButton.whileHeld(new Elevate(Height.CARGO_SHIP));
 		bButton.whileHeld(new Elevate(Height.BOTTOM_ROCKET));
 		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
-		xButton.whileHeld(new Climb());
+		//xButton.whileHeld(new Climb());
 		//startButton.whileHeld(new Climb());
-		backButton.whileHeld(new MoveClimber(ClimbDirection.UP));
-		startButton.whileHeld(new MoveClimber(ClimbDirection.DOWN));
+		backButton.whenPressed(new MoveWings());
+		startButton.whenPressed(new MoveHatchArm());
+		xButton.whileHeld(new RunHatchIntake());
 
 		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));
 		xBoxRightTrigger.whileHeld(new RunIntakeWheels(WheelDirection.OUT));
@@ -78,6 +82,8 @@ public class OI {
 		rightStickTrigger.whileHeld(new ControlledDriveStraight());
 		rightStickThumbButton.whileHeld(new ControlledApproachTarget());
 		rightStick4.whenPressed(new FlipVisionMode());
+
+		leftStickTrigger.whenPressed(new FlipReverseMode());
 		
 		
   }

@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RunHatchIntake extends Command {
-  public RunHatchIntake() {
+public class HatchIntakeComeHere extends Command {
+  public HatchIntakeComeHere() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -43,7 +43,6 @@ public class RunHatchIntake extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatchIntake.wingsOpen();
-    Robot.hatchIntake.armSolenoidIn();
+    end();
   }
 }

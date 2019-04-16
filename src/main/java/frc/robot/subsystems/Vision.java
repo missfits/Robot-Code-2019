@@ -63,7 +63,7 @@ public class Vision extends Subsystem {
     return table.getEntry(target == TargetSpot.CENTER? "Center Offset" : "Side Offset").getDouble(0);
   } 
   public boolean getVisionMode(){
-    System.out.println("Getting vision mode " + table.getEntry("Vision Mode").getBoolean(false));
+    //System.out.println("Getting vision mode " + table.getEntry("Vision Mode").getBoolean(false));
     return table.getEntry("Vision Mode").getBoolean(false);
   }
  

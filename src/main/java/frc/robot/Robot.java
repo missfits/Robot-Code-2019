@@ -78,6 +78,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    System.out.println(vision.getVisionMode());
     //System.out.println(oi.xBoxLeftStickY());
   }
 

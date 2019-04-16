@@ -72,12 +72,14 @@ public class OI {
 		//startButton.whileHeld(new Climb());
 		backButton.whenPressed(new MoveWings());
 		startButton.whenPressed(new MoveHatchArm());
-		xButton.whileHeld(new RunHatchIntake());
+		xButton.whileHeld(new HatchIntakeComeHere());
 
 		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));
 		xBoxRightTrigger.whileHeld(new RunIntakeWheels(WheelDirection.OUT));
-		leftBumperButton.whileHeld(new RunIntakeArm(ArmDirection.UP));
-		rightBumperButton.whileHeld(new RunIntakeArm(ArmDirection.DOWN));
+		//make left bumper pickup hatch
+		leftBumperButton.whileHeld(new HatchIntakeComeHere());
+		//make right bumper place hatch
+		rightBumperButton.whileHeld(new HatchIntakeGetAway());
 
 		rightStickTrigger.whileHeld(new ControlledDriveStraight());
 		rightStickThumbButton.whileHeld(new ControlledApproachTarget());

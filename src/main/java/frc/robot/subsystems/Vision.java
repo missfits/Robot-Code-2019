@@ -43,10 +43,8 @@ public class Vision extends Subsystem {
     table.getEntry("Vision Mode").setBoolean(b);
  
     if(table.getEntry("Reverse Drive").getBoolean(false)){
-      System.out.println("light 2");
       light2.set(b ? edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward : edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse);
     }else{
-      System.out.println("light 1");
       light1.set(b ? Value.kReverse : Value.kOff);
     }
   }

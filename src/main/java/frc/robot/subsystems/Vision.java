@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Relay.Value;
@@ -25,7 +27,8 @@ public class Vision extends Subsystem {
  // double offsetValue =  NetworkTable.getTable("RaspberryPi").getNumber("Offset", 0);
   private NetworkTable table;
   private AnalogInput ultrasonic = new AnalogInput(0);
-  private Relay light = new Relay(0);
+  private Relay light1 = new Relay(0);
+  private DoubleSolenoid light2 = new DoubleSolenoid(4,5);
   
   public double getDistance(){
     //units is in inches (idk why it's supposed to be in mm)
@@ -39,10 +42,12 @@ public class Vision extends Subsystem {
     System.out.println("Setting Vision Mode " + b);
     table.getEntry("Vision Mode").setBoolean(b);
  
-    if (b){
-      light.set(Value.kReverse);
+    if(table.getEntry("Reverse Drive").getBoolean(false)){
+      System.out.println("light 2");
+      light2.set(b ? edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward : edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse);
     }else{
-      light.set(Value.kOff);
+      System.out.println("light 1");
+      light1.set(b ? Value.kReverse : Value.kOff);
     }
   }
 

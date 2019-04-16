@@ -32,6 +32,7 @@ public class RobotMap {
   public static int intakeArm = 1;
   public static int climberArms = 3;
   
+
   //2018 bot
   public static int frontLeft = 1;
   public static int rearLeft = 5;

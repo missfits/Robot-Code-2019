@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.*;
+import frc.robot.commands.ChangeCompressorState.CompressorState;
 import frc.robot.commands.IntakeTilt.TiltPosition;
 import frc.robot.commands.MoveClimber.ClimbDirection;
 import frc.robot.commands.RunIntakeArm.ArmDirection;
@@ -70,8 +71,9 @@ public class OI {
 		//xButton.whileHeld(new IntakeTilt(TiltPosition.CLIMBING));
 		//xButton.whileHeld(new Climb());
 		//startButton.whileHeld(new Climb());
-		backButton.whenPressed(new MoveWings());
-		startButton.whenPressed(new MoveHatchArm());
+		backButton.whenPressed(new ChangeCompressorState(CompressorState.ON));
+		startButton.whenPressed(new ChangeCompressorState(CompressorState.OFF));
+
 		xButton.whileHeld(new HatchIntakeComeHere());
 
 		xBoxLeftTrigger.whileHeld(new RunIntakeWheels(WheelDirection.IN));

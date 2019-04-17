@@ -29,6 +29,7 @@ public class ApproachTarget extends BetterCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.hatchIntake.compressorOff();
     System.out.println("Starting Approach Target");
     Robot.vision.setVisionMode(true);
     startingDistance = Robot.vision.getDistance() - targetDistance;
@@ -85,6 +86,7 @@ public class ApproachTarget extends BetterCommand {
     SmartDashboard.putNumber("Done Driving",Robot.vision.getDistance());
     System.out.println("Done Approaching Target  due to " + (Robot.vision.getContourNumber() < 2? "contours" : "distance"));
     Robot.driveTrain.driveStraight(0);
+    Robot.hatchIntake.compressorOff();
     //Robot.vision.setVisionMode(false);
   }
 

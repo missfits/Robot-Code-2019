@@ -30,13 +30,15 @@ public class TeleopIntake extends Command {
         Robot.cargoIntake.testTilt(Math.signum(Robot.oi.xBoxLeftStickY())*0.5);
       }
       if(Robot.oi.xBoxLeftStickY() < 0 && !Robot.cargoIntake.tiltLimitPressed()){
-        Robot.cargoIntake.wheelsIn(0.2);
+        Robot.cargoIntake.wheelsIn(0.4);
       }else{
         Robot.cargoIntake.wheelsStop();
       }
     }else{
       Robot.cargoIntake.stopTilt();
-      Robot.cargoIntake.wheelsStop();
+      if(!Robot.oi.xBoxLeftTrigger.get() && !Robot.oi.xBoxRightTrigger.get()){
+        Robot.cargoIntake.wheelsStop();
+      }
     }
   }
 

@@ -57,7 +57,7 @@ public class HatchIntake extends Subsystem {
   }
 
   public void setUpCompressor(){
-    compressor.setClosedLoopControl(true);
+    compressor.setClosedLoopControl(false);
   }
 
   public String getPositionString(boolean checkingWings){
